@@ -285,7 +285,7 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
   }
   let registration=null;
   async function check(manual){
-    if(checking || !navigator.onLine)return;
+    if(checking)return; if(!navigator.onLine){if(manual)notify('Нет подключения к интернету.');return;}
     checking=true;
     if(manual)notify('Проверяю наличие обновлений…');
     try{
