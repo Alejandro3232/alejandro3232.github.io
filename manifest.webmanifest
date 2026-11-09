@@ -1,0 +1,26 @@
+{
+  "name": "PProg Viewer — Конфигурации Болид",
+  "short_name": "PProg Viewer",
+  "description": "Локальный просмотр TXT-конфигураций Болид PProg",
+  "lang": "ru",
+  "start_url": "./?v=4",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090e18",
+  "theme_color": "#090e18",
+  "icons": [
+    {
+      "src": "./icon-192.png?v=4",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png?v=4",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "id": "./?app=pprog-viewer"
+}
