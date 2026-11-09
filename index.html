@@ -150,6 +150,13 @@
 .partition-group-part{border:1px solid #436891;background:#203753;color:#c5dfff;border-radius:7px;cursor:pointer;padding:7px 10px;max-width:100%;overflow-wrap:anywhere;text-align:left;font-size:12px}
 @media(max-width:530px){.partition-mode-switch{width:100%;display:grid;grid-template-columns:1fr 1fr}.partition-mode-switch button{white-space:normal;padding:9px 6px;font-size:12px}}
 
+
+/* Avoid an iOS keyboard lifting the fixed bottom bar over the search results. */
+@media (max-width:850px) {
+ body.pprog-keyboard-open #mobileBottomNav { display:none!important; }
+ body.pprog-keyboard-open .content { padding-bottom:18px!important; }
+ body.pprog-keyboard-open .toast { bottom:18px!important; }
+}
 /* Уведомление появляется только при наличии новой версии. */
 #pprogUpdateNotice{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom));left:14px;right:14px;z-index:200;max-width:520px;margin:auto;background:#1c3553;color:#e9f4ff;border:1px solid #6592c5;border-radius:15px;padding:15px;box-shadow:0 15px 35px #0008;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #pprogUpdateNotice[hidden]{display:none!important}
@@ -327,6 +334,34 @@ document.getElementById('brandIcon').innerHTML=icon('cpu');document.getElementBy
  refresh();
 })();
 </script><script>
+/* Keyboard-specific layout for iOS PWA; preserve tabs while not editing. */
+(function(){
+ const textField=el=>!!el&&(el.matches?.('input:not([type="file"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"]')||el.isContentEditable);
+ let keyboardOpen=false;
+ const set=open=>{keyboardOpen=!!open;document.body.classList.toggle('pprog-keyboard-open',keyboardOpen);};
+ document.addEventListener('focusin',e=>{if(textField(e.target))set(true)});
+ document.addEventListener('focusout',()=>setTimeout(()=>{if(!textField(document.activeElement))set(false)},90));
+ const dismissOnNavigation=e=>{
+   if(!textField(document.activeElement))return;
+   if(e.target.closest?.('[data-nav],[data-device],[data-partition],[data-partitions-view],[data-open-partition-groups],[data-mobile-page]')){
+     document.activeElement.blur();
+     set(false);
+   }
+ };
+ document.addEventListener('pointerdown',dismissOnNavigation,true);
+ document.addEventListener('click',dismissOnNavigation,true);
+ if(window.visualViewport){
+   let fullHeight=window.visualViewport.height;
+   window.visualViewport.addEventListener('resize',()=>{
+     const viewport=window.visualViewport;
+     if(!textField(document.activeElement)){fullHeight=Math.max(fullHeight,viewport.height);if(keyboardOpen)set(false);return;}
+     if(viewport.height>fullHeight-50&&keyboardOpen){set(false);}
+     if(viewport.height<fullHeight-110&&!keyboardOpen){set(true);}
+   });
+ }
+})();
+</script>
+<script>
 if ('serviceWorker' in navigator && location.protocol === 'https:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
@@ -354,7 +389,7 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
 /* Клиентский механизм обновления. Проверка через version.json минует кеш SW. */
 (function(){
   'use strict';
-  const LOCAL_BUILD='2026.11.10.6';
+  const LOCAL_BUILD='2026.11.10.7';
   let checking=false;
   const banner=document.createElement('div');
   banner.id='pprogUpdateNotice';
