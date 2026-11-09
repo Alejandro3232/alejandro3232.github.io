@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="color-scheme" content="dark">
 <title>PProg Viewer — Конфигурация Болид</title>
 <meta name="theme-color" content="#090e18">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -98,6 +98,12 @@
 .install-steps{display:flex;flex-direction:column;gap:10px;margin:19px 0}.install-step{display:flex;align-items:start;gap:13px;border-radius:11px;background:#15283f;padding:12px}.install-step-count{background:#35649b;border-radius:9px;display:grid;place-items:center;width:28px;height:28px;font-size:12px;font-weight:800;flex:none}.install-step-content{font-size:13px;line-height:1.45;color:#dbe9fa}.install-step-content b{color:#fff}.install-note{font-size:12px;color:#98adca;line-height:1.5;margin:9px 0 18px}.install-modal-actions{display:flex;gap:9px;flex-wrap:wrap}.install-dismiss{min-height:43px;padding:10px 16px;background:#3267b3;color:#fff;border:1px solid #517dbe;border-radius:10px;font-weight:750;flex:1}.install-copy{min-height:43px;padding:10px 16px;background:#20344f;color:#d9e9ff;border:1px solid #3c5877;border-radius:10px;font-weight:650;flex:1}
 @media(display-mode:standalone){.install-cta{display:none!important}}
 @media(min-width:650px){.install-modal{align-items:center}}
+
+/* PProg PWA: fixed interface scale on touch screens. Preserve regular vertical and horizontal scrolling. */
+@media (pointer: coarse) {
+  html, body, body * { touch-action: pan-x pan-y !important; }
+  input, select, textarea, [contenteditable="true"] { font-size: 16px !important; }
+}
 </style>
 </head>
 <body>
