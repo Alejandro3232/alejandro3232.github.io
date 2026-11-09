@@ -105,6 +105,27 @@
   input, select, textarea, [contenteditable="true"] { font-size: 16px !important; }
 }
 
+/* Mobile PWA: keep the top toolbar visible while the document scrolls.
+   Unlike position:sticky inside the flex app, fixed is relative to the viewport on iOS. */
+@media (max-width:850px) {
+  :root { --pprog-toolbar-height:65px; }
+  .main { padding-top:calc(var(--pprog-toolbar-height) + env(safe-area-inset-top, 0px)); }
+  .topbar {
+    position:fixed !important;
+    inset:auto 0 auto 0;
+    top:env(safe-area-inset-top, 0px) !important;
+    height:var(--pprog-toolbar-height) !important;
+    width:100%;
+    z-index:85 !important;
+    box-shadow:0 6px 24px #0007;
+    background:#0c1421f7;
+  }
+  .zone-table thead th { top:var(--sticky-zone-top, calc(65px + env(safe-area-inset-top, 0px))) !important; }
+}
+@media (max-width:530px) {
+  :root { --pprog-toolbar-height:62px; }
+}
+
 /* Уведомление появляется только при наличии новой версии. */
 #pprogUpdateNotice{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom));left:14px;right:14px;z-index:200;max-width:520px;margin:auto;background:#1c3553;color:#e9f4ff;border:1px solid #6592c5;border-radius:15px;padding:15px;box-shadow:0 15px 35px #0008;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #pprogUpdateNotice[hidden]{display:none!important}
@@ -269,7 +290,7 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
 /* Клиентский механизм обновления. Проверка через version.json минует кеш SW. */
 (function(){
   'use strict';
-  const LOCAL_BUILD='2026.11.10.2';
+  const LOCAL_BUILD='2026.11.10.3';
   let checking=false;
   const banner=document.createElement('div');
   banner.id='pprogUpdateNotice';
