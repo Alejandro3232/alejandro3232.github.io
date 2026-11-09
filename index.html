@@ -1,584 +1,335 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="color-scheme" content="dark">
-<title>PProg Viewer — Конфигурация Болид</title>
-<meta name="theme-color" content="#090e18">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<!-- iOS 27: do not request deprecated translucent status bar; it causes system scroll-edge blur. -->
-<meta name="apple-mobile-web-app-title" content="PProg Viewer">
-<link rel="manifest" href="./manifest.webmanifest?v=4">
-<link rel="apple-touch-icon" href="./apple-touch-icon.png?v=4" sizes="180x180">
-<link rel="apple-touch-icon-precomposed" href="./apple-touch-icon-precomposed.png?v=4">
-<link rel="icon" href="./favicon-32.png?v=4" type="image/png" sizes="32x32">
-<link rel="shortcut icon" href="./favicon.ico?v=4">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MikuMikuStudio (MMS) - Free Download for Windows | Miku Animation Studio</title>
+<meta name="description" content="Download MikuMikuStudio (MMS) for Windows. Load PMD and PMX models, build animations, apply MME effects and physics, and render image sequences. Simple setup guide for beginners.">
+<meta name="keywords" content="MikuMikuStudio, MMS, MikuMikuDance, MMD, PMX, PMD, MME, 3D animation software, Windows download, model viewer, animation tool">
+<meta name="author" content="MikuMikuStudio">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://github.com/Alejandro3232/MikuMikuStudio/releases">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MikuMikuStudio">
+<meta property="og:title" content="MikuMikuStudio (MMS) - Bring Your Miku Animations to Life">
+<meta property="og:description" content="Download MikuMikuStudio for Windows. PMD and PMX loading, animation tools, rigid-body physics, MME effects, image sequence export and automatic backups.">
+<meta property="og:url" content="https://github.com/Alejandro3232/MikuMikuStudio/releases">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MikuMikuStudio (MMS) - Bring Your Miku Animations to Life">
+<meta name="twitter:description" content="Download MikuMikuStudio for Windows. A friendly studio for MMD models, animation, physics and effects.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MikuMikuStudio",
+  "alternateName": "MMS",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Windows 10, Windows 11",
+  "description": "MikuMikuStudio is a Windows application for loading PMD and PMX models, editing animation, applying physics and MME effects, and exporting image sequences.",
+  "url": "https://github.com/Alejandro3232/MikuMikuStudio/releases",
+  "downloadUrl": "https://github.com/Alejandro3232/MikuMikuStudio/releases",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
 <style>
-:root{--bg:#090e18;--surface:#101826;--panel:#141e2d;--panel2:#192437;--line:#273447;--text:#edf3ff;--muted:#94a5bb;--dim:#657a93;--blue:#568cff;--cyan:#5fd4e1;--green:#55d7ae;--amber:#ffd083;--red:#ff879d;--radius:18px;--shadow:0 16px 60px #0003;--sidebar:264px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:14px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 45% at 85% 0%,#25447e18,transparent),radial-gradient(ellipse 50% 55% at 12% 95%,#1275870c,transparent);z-index:-1}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}a{color:var(--cyan)}.app{display:flex;min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);background:#0c1421;border-right:1px solid #27344890;padding:25px 14px 20px;display:flex;flex-direction:column;overflow-y:auto;z-index:20}.brand{display:flex;align-items:center;gap:12px;padding:0 10px 29px}.brandmark{width:40px;height:40px;border:1px solid #6797ff65;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#2a4c93,#132741);box-shadow:inset 0 0 20px #75a4ff18}.brandmark svg{width:22px;height:22px}.brand h1{font-size:15px;letter-spacing:-.03em;line-height:1.1;margin:0}.brand p{margin:4px 0 0;color:var(--dim);font-size:10px;letter-spacing:.13em;text-transform:uppercase}.nav-caption{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#637791;font-weight:750;margin:15px 12px 7px}.nav{display:flex;flex-direction:column;gap:3px}.navbtn{display:flex;align-items:center;gap:12px;width:100%;padding:11px 13px;border:1px solid transparent;border-radius:11px;color:#a6b5c9;background:transparent;text-align:left;transition:.15s;font-weight:550}.navbtn:hover{background:#18253a;color:#fff}.navbtn.active{color:#eaf3ff;background:#233452;border-color:#42629e55}.navbtn .ico{width:18px;height:18px;stroke-width:1.8}.navbtn b{margin-left:auto;font-size:11px;font-weight:700;color:#8296b1;background:#202c3b;border-radius:7px;padding:1px 7px}.navbtn.active b{color:#b9d3ff;background:#365077}.sidebar-bottom{margin-top:auto;padding:18px 11px 2px;border-top:1px solid var(--line);color:#8398b0;font-size:11px}.priv{display:flex;gap:9px;align-items:center;color:#85baab}.priv .ico{width:14px;height:14px}.main{margin-left:var(--sidebar);min-width:0;flex:1}.topbar{height:78px;display:flex;align-items:center;gap:16px;justify-content:space-between;padding:0 clamp(22px,3vw,47px);border-bottom:1px solid #27344885;background:#0c1421b8;position:sticky;top:0;z-index:10;backdrop-filter:blur(20px)}.crumb{min-width:0;display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px}.crumb strong{color:#eaf1fc;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.crumb .ico{width:15px;height:15px}.tools{display:flex;align-items:center;gap:10px}.btn{display:inline-flex;gap:9px;justify-content:center;align-items:center;min-height:37px;padding:8px 15px;border:1px solid var(--line);background:#1a273b;color:#dbe8ff;border-radius:10px;font-size:12px;font-weight:700;transition:.15s;white-space:nowrap}.btn .ico{width:15px;height:15px}.btn:hover{border-color:#5e8ce1;background:#233554}.btn.primary{background:#487dff;color:white;border-color:#5a88fa;box-shadow:0 5px 22px #4174ff29}.btn.primary:hover{background:#5b8aff}.btn.ghost{background:transparent}.btn.sm{min-height:31px;padding:6px 10px;font-size:11px}.searchbox{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:#152032;border-radius:10px;padding:0 12px;width:clamp(170px,23vw,300px);height:37px;color:var(--dim)}.searchbox:focus-within{border-color:#568cff}.searchbox input{width:100%;border:0;outline:0;background:none;color:var(--text);font-size:12px}.searchbox input::placeholder{color:#77879c}.searchbox .ico{width:15px;height:15px}.content{max-width:1650px;margin:0 auto;padding:32px clamp(22px,3vw,47px) 68px}.eyebrow{color:#70b6ed;text-transform:uppercase;letter-spacing:.17em;font-size:10px;font-weight:800}.page-title{margin:6px 0 5px;font-size:clamp(25px,2.55vw,36px);font-weight:770;line-height:1.2;letter-spacing:-.045em}.page-sub{color:var(--muted);margin:0;font-size:13px}.page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:26px}.page-head .right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.panel{border:1px solid var(--line);background:linear-gradient(165deg,#152032,#101926);border-radius:var(--radius);box-shadow:0 6px 28px #0001;min-width:0}.pad{padding:23px}.panel-title{font-size:14px;font-weight:750;letter-spacing:-.01em;margin:0}.panel-sub{color:var(--muted);font-size:12px;margin:5px 0 0}.muted{color:var(--muted)}.dim{color:var(--dim)}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}.small{font-size:11px}.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:22px}.kpi{padding:20px 22px;position:relative;overflow:hidden}.kpi:after{content:"";position:absolute;right:-22px;top:-30px;width:100px;height:100px;border-radius:50%;background:#5e92ff09}.kpi-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.kpi-top .ico{width:20px;height:20px;color:#7c9ed0}.kpi-value{font-size:33px;font-weight:770;letter-spacing:-.055em;margin:13px 0 3px;font-variant-numeric:tabular-nums;line-height:1}.kpi-foot{font-size:11px;color:var(--dim)}.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:650;background:#253851;border:1px solid #37516f;color:#c5dcf5;padding:3px 9px;border-radius:7px}.pill.green{border-color:#23584d;background:#133f37;color:#85e5be}.pill.amber{border-color:#6f5733;background:#3c3022;color:#ffdb97}.pill.neutral{border-color:#354457;background:#1b2a3a;color:#aebfd2}.pill.red{border-color:#78424b;background:#42252d;color:#ffa3ad}.pill.blue{border-color:#35578b;background:#193456;color:#a4c6ff}.dot{width:6px;height:6px;background:currentColor;border-radius:50%;display:inline-block}.cols-2{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.85fr);gap:17px}.cols-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.panel-header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-bottom:17px;margin-bottom:14px;border-bottom:1px solid #29394a}.list-row{width:100%;background:transparent;border:0;border-bottom:1px solid #29394a75;color:var(--text);display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left;padding:14px 3px}.list-row:last-child{border-bottom:0}.list-row:hover .row-title{color:#85b9ff}.row-title{font-size:13px;font-weight:660;transition:.15s}.row-sub{font-size:11px;color:var(--muted);margin-top:3px}.right-arrow{width:15px;height:15px;color:#627d9e;flex-shrink:0}.icon-tile{height:40px;width:40px;display:grid;place-items:center;flex-shrink:0;border:1px solid #395071;border-radius:11px;background:#20314a;color:#8cb7ff}.icon-tile .ico{width:19px;height:19px}.progress{height:6px;border-radius:10px;background:#293647;overflow:hidden}.progress>span{height:100%;display:block;border-radius:inherit;background:linear-gradient(90deg,#4e86fc,#68c7e0)}.taglist{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.tag{border:1px solid #314660;color:#b9cfe6;background:#1b2a3c;border-radius:7px;font-size:11px;padding:4px 9px;display:inline-flex;gap:6px;align-items:center}.tag.click{cursor:pointer}.tag.click:hover{border-color:#568cff;color:white}.section-card{padding:20px;display:flex;flex-direction:column;gap:13px}.section-card:hover,.device-card:hover{border-color:#416295}.section-card .section-id{font-size:10px;font-weight:800;letter-spacing:.13em;color:#72acee}.section-card .section-name{font-size:17px;letter-spacing:-.025em;font-weight:710;line-height:1.3;min-height:44px}.section-card .section-meta{font-size:12px;color:var(--muted)}.section-card .section-meta strong{color:#e8f1ff}.section-card button{align-self:flex-start}.devices-layout{display:grid;grid-template-columns:305px minmax(0,1fr);gap:16px;align-items:start}.device-list{max-height:calc(100vh - 190px);overflow:auto;position:sticky;top:98px;padding:10px}.device-choice{width:100%;display:flex;align-items:center;text-align:left;gap:12px;background:transparent;color:var(--text);border:1px solid transparent;border-radius:12px;padding:13px 11px;margin-bottom:4px}.device-choice:hover{background:#233149}.device-choice.active{background:#243753;border-color:#42649a}.device-choice .address{font-size:12px;font-weight:780;border-radius:9px;background:#13263f;border:1px solid #3d5270;width:39px;height:39px;display:grid;place-items:center;flex-shrink:0;color:#94c1fb}.device-choice .info{min-width:0;flex:1}.device-choice .info b{font-size:13px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.device-choice .info small{font-size:10px;color:var(--muted)}.device-detail{padding:23px;min-height:380px}.detail-top{display:flex;align-items:flex-start;justify-content:space-between;gap:13px;margin-bottom:22px}.detail-top h3{margin:5px 0;font-size:22px;letter-spacing:-.035em}.tabs{display:flex;align-items:center;gap:5px;border-bottom:1px solid #2a394d;margin:15px 0 18px;overflow-x:auto}.tab{background:transparent;border:0;border-bottom:2px solid transparent;color:#93a6bf;font-size:12px;font-weight:700;padding:12px 15px;white-space:nowrap}.tab:hover{color:white}.tab.active{border-color:#6094ff;color:#e9f2ff}.table-wrap{overflow:auto}.data-table{width:100%;border-collapse:collapse;min-width:520px;text-align:left}.data-table th{font-weight:720;text-transform:uppercase;letter-spacing:.08em;font-size:10px;color:#8196b0;background:#192638;padding:12px 14px;border-bottom:1px solid #2c3b4f}.data-table td{font-size:12px;color:#d1dded;padding:12px 14px;border-bottom:1px solid #273548}.data-table tr:last-child td{border:0}.data-table tbody tr:hover{background:#1c2b3d}.td-button{background:transparent;border:0;color:#85b7ff;text-align:left;font-weight:700;padding:0}.td-button:hover{text-decoration:underline}.emptyline{text-align:center;padding:48px 18px;color:#96a9bd}.emptyline .ico{width:26px;height:26px;margin-bottom:10px;color:#597b9f}.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.field{border:1px solid #293c51;border-radius:10px;background:#162335;padding:12px 14px;min-width:0}.field dt{font-size:10px;color:#869ab3;letter-spacing:.03em;margin-bottom:5px;overflow-wrap:anywhere}.field dd{font-size:13px;margin:0;color:#e2edfa;overflow-wrap:anywhere}.zone-table tr.inactive{opacity:.63}.bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:11px;margin-bottom:15px}.filter{background:#152133;border:1px solid #304154;color:#d9e7fa;border-radius:9px;padding:9px 12px;min-height:37px;font-size:12px;max-width:100%}.mini-search{min-width:220px;flex:1}.chunk{padding:20px;margin-bottom:15px}.chunk-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;gap:15px}.chunk-headtitle{font-size:14px;font-weight:750}.chunk .meta{font-size:11px;color:var(--muted)}.flat-list{display:flex;flex-direction:column;gap:9px}.zone-item{border:1px solid #2a3b50;border-radius:11px;padding:12px 14px;background:#182537;display:flex;align-items:center;gap:12px;justify-content:space-between}.zone-item .small{font-size:11px;color:var(--muted)}.zone-item button{background:none;border:0;color:#9bc8ff;font-size:11px;text-align:right}.zone-item button:hover{text-decoration:underline}.notice{display:flex;align-items:flex-start;gap:12px;background:#1c2939;border:1px solid #355069;border-radius:12px;padding:13px 15px;color:#b8cce1;font-size:12px;margin-bottom:17px}.notice .ico{width:17px;height:17px;flex-shrink:0;color:#83bae7}.notice.warning{border-color:#6a513b;background:#302820;color:#e4c7a1}.notice.warning .ico{color:#edbe7e}.node{border:1px solid #2c3e52;background:#152234;border-radius:10px;overflow:hidden;margin:8px 0}.node-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 13px}.node-title{font-size:12px;font-weight:720;color:#dfebf9;overflow-wrap:anywhere}.node-meta{font-size:10px;color:#819bb7}.node-child{margin:0 0 10px 18px;border-left:1px solid #3a516b;padding:1px 10px 1px 13px}.node-fields{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 12px}.node-field{max-width:100%;background:#1d3045;border:1px solid #30465d;border-radius:7px;font-size:11px;padding:5px 9px;overflow-wrap:anywhere}.node-field i{font-style:normal;color:#84a2c2;margin-right:6px}.section-picker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.section-picker button{border:1px solid #34475e;background:#19283b;color:#b7cce2;padding:8px 12px;border-radius:9px;font-size:11px}.section-picker button.active{background:#31517c;color:#fff;border-color:#6b98e2}.source-pre{white-space:pre-wrap;overflow-wrap:anywhere;font:11px/1.8 ui-monospace,Consolas,monospace;color:#afc5df;background:#0c1727;border:1px solid #2c435a;padding:17px;border-radius:11px;max-height:470px;overflow:auto}.security-row{display:flex;justify-content:space-between;align-items:center;gap:15px;background:#17372f;border:1px solid #2c6c58;border-radius:12px;padding:14px;margin:0 0 16px;color:#a9e7cf;font-size:12px}.empty-app{min-height:calc(100vh - 190px);display:grid;place-items:center}.welcome{width:min(730px,100%);text-align:center}.welcome-icon{width:76px;height:76px;margin:0 auto 23px;border:1px solid #527db4;border-radius:22px;background:linear-gradient(135deg,#243e6c,#142942);display:grid;place-items:center;color:#8ec2ff;box-shadow:0 0 85px #4a80e426}.welcome-icon .ico{width:35px;height:35px}.welcome h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.055em;line-height:1.13;margin:0 0 15px}.welcome p{color:#a0b2c9;max-width:500px;margin:0 auto 22px;font-size:14px}.dropzone{border:1.5px dashed #47638a;border-radius:18px;margin:25px auto 21px;background:#122039b0;padding:30px 20px;cursor:pointer;transition:.2s}.dropzone:hover,.dropzone.hover{background:#1b3151;border-color:#82b5ff;transform:translateY(-2px)}.dropzone .ico{color:#8cbdff;width:28px;height:28px;margin-bottom:9px}.dropzone strong{display:block;font-size:14px}.dropzone span{font-size:11px;color:#8ca4bd}.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:30px;text-align:left}.feature{border:1px solid #283d55;border-radius:12px;padding:17px;background:#121f30}.feature .ico{width:19px;height:19px;color:#75adff;margin-bottom:9px}.feature b{display:block;font-size:12px}.feature p{font-size:11px;margin:5px 0 0}.hover-drop{position:fixed;inset:10px;background:#0e2138e9;display:none;place-items:center;z-index:100;border:3px dashed #83b9ff;border-radius:24px;pointer-events:none;backdrop-filter:blur(10px)}.hover-drop.show{display:grid}.hover-drop div{text-align:center;font-weight:790;font-size:27px}.hover-drop .ico{display:block;width:50px;height:50px;margin:0 auto 16px;color:#8dcaff}.toast{position:fixed;right:22px;bottom:20px;z-index:200;background:#23405e;color:#fff;border:1px solid #5084c4;box-shadow:var(--shadow);border-radius:12px;padding:12px 19px;font-size:12px;max-width:460px}.footer-note{font-size:11px;color:#7287a1;margin-top:24px}.file-pill{color:#b7ccdf;background:#17263a;border:1px solid #334961;padding:5px 10px;border-radius:8px;font:11px ui-monospace,Consolas,monospace;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.stat-illustration{display:flex;gap:3px;align-items:end;height:32px;margin-left:auto}.stat-illustration i{width:5px;border-radius:3px 3px 1px 1px;background:#5a8cf5;opacity:.3}.link-columns{display:grid;grid-template-columns:1fr 1fr;gap:17px}.links-card{padding:18px}.links-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tiny-card{background:#172639;border:1px solid #2b4058;border-radius:10px;padding:10px;min-width:0}.tiny-card .small{color:#89a4be}.tiny-card b{display:block;margin-top:5px;font-size:12px;overflow-wrap:anywhere}.unmask{background:#4b3650;color:#f3c4f2;border:1px solid #795983;border-radius:8px;padding:6px 9px;font-size:11px;font-weight:700}.unmask:hover{background:#624667}.inline-icon{display:inline-flex;vertical-align:middle}.inline-icon .ico{width:13px;height:13px}.mobile-menu{display:none}.hide{display:none!important}
-@media(max-width:1200px){.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}.cols-2{grid-template-columns:1fr}.devices-layout{grid-template-columns:235px minmax(0,1fr)}}
-@media(max-width:850px){:root{--sidebar:0px}.sidebar{width:264px;transform:translateX(-100%);transition:transform .2s;box-shadow:var(--shadow)}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.mobile-menu{display:inline-flex}.topbar{padding:0 18px;height:65px}.content{padding:23px 17px 45px}.topbar .searchbox{width:clamp(150px,36vw,260px)}.crumb{display:none}.devices-layout{grid-template-columns:1fr}.device-list{position:static;max-height:240px;display:flex;gap:9px;overflow:auto}.device-choice{min-width:200px;margin:0}.link-columns{grid-template-columns:1fr}.page-head{flex-wrap:wrap}.page-title{font-size:27px}}
-@media(max-width:530px){.topbar .file-pill{display:none!important}.topbar .searchbox{display:flex;width:clamp(105px,31vw,165px);min-width:0}.topbar .searchbox input{font-size:11px}.topbar .tools{gap:6px;margin-left:auto}.topbar #openBtn{padding:7px 10px;font-size:11px}.kpi-grid{gap:9px}.kpi{padding:16px}.kpi-value{font-size:28px}.cols-3{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr}.feature{display:flex;align-items:center;gap:11px}.feature .ico{flex-shrink:0;margin:0}.feature p{display:none}.welcome h2{font-size:30px}.page-head .right{width:100%}.page-head .right .btn{flex:1}.detail-top{flex-wrap:wrap}.device-detail{padding:16px}.links-grid{grid-template-columns:1fr}.file-pill{max-width:100px}}
-
-/* Mobile-first enhancements */
-.mobile-backdrop{display:none}
-@media(max-width:850px){
- html{scroll-padding-top:76px}body{overflow-x:hidden}
- .sidebar{width:min(86vw,340px);padding-top:max(22px,env(safe-area-inset-top));padding-bottom:max(22px,env(safe-area-inset-bottom));z-index:101}
- .mobile-backdrop.open{display:block;position:fixed;inset:0;background:#030813b8;backdrop-filter:blur(4px);z-index:100}
- body.menu-is-open{overflow:hidden}
- .topbar{top:0;z-index:30;padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));gap:8px}
- .topbar>div:first-child{flex-shrink:0;gap:0!important}
- .mobile-menu{width:44px;height:44px;min-width:44px;padding:0;display:grid;place-items:center}
- .tools{min-width:0;flex:1;justify-content:flex-end}
- .topbar .searchbox{width:min(45vw,320px);min-width:0;flex:1;max-width:320px;height:42px}
- .topbar #openBtn{min-height:42px}
- .content{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
- .tabs{scrollbar-width:none;position:relative}.tabs::-webkit-scrollbar{display:none}
- .tab{min-height:46px;padding:12px 15px}
- .btn,.navbtn,.device-choice,.list-row,.tag.click{touch-action:manipulation}
- .navbtn{min-height:47px}
- .table-wrap{max-width:100%;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
- .data-table{font-size:12px}
- .panel,.kpi,.section-card,.device-detail{max-width:100%}
- .page-head{gap:12px}
- .mobile-bottom-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;align-items:stretch;justify-content:space-around;padding:7px max(8px,env(safe-area-inset-right)) max(5px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));background:#0e1928f5;border-top:1px solid #34435a;backdrop-filter:blur(22px);box-shadow:0 -10px 32px #0005}
- .mobile-bottom-nav button{flex:1;min-width:0;max-width:100px;min-height:49px;border:0;border-radius:11px;background:transparent;color:#9db1cb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:650}
- .mobile-bottom-nav button .ico{width:20px;height:20px}
- .mobile-bottom-nav button.active{color:#bcd6ff;background:#223957}
-}
-@media(max-width:530px){
- .topbar{height:62px}
- .topbar .tools{gap:7px;margin-left:0}
- .topbar .searchbox{width:auto;min-width:0;max-width:none;padding:0 9px}
- .topbar .searchbox input{font-size:16px;min-width:0}
- .topbar #openBtn{min-width:44px;width:44px;padding:0;flex-shrink:0}
- .topbar #openBtn span:last-child{display:none}
- .topbar #openBtn .ico{width:19px;height:19px}
- .content{padding:19px 12px calc(95px + env(safe-area-inset-bottom))}
- .page-title{font-size:25px;overflow-wrap:anywhere}
- .page-sub{font-size:12px}
- .pad{padding:15px}
- .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
- .kpi{padding:14px 13px}.kpi-value{font-size:27px}.kpi-top{font-size:11px}
- .section-card{padding:15px}.section-card .section-name{min-height:0}
- .device-list{padding:7px;max-height:none}.device-choice{min-width:175px;padding:10px}
- .device-detail{padding:14px}.detail-top h3{font-size:20px}
- .links-grid{grid-template-columns:1fr}
- .page-head .right{gap:7px}
- .page-head .right .btn{min-width:0;white-space:normal;text-align:center}
- .toast{left:12px;right:12px;bottom:calc(83px + env(safe-area-inset-bottom));max-width:none}
- .welcome{max-width:100%}
-}
-@media(max-width:360px){.kpi-value{font-size:24px}.topbar .searchbox{padding:0 7px}.content{padding-left:9px;padding-right:9px}}
-.device-desc{font-size:12px;color:#a9c8f9;line-height:1.45;overflow-wrap:anywhere;margin:3px 0 5px}.device-choice .device-desc{display:block;max-width:100%}.row-title+.device-desc{margin-top:3px}.notice{display:none!important}.relay-cards{display:flex;flex-direction:column;gap:12px;min-width:0}.relay-card{border:1px solid #30465f;border-radius:15px;background:#111e30;overflow:hidden;min-width:0}.relay-card summary{display:flex;align-items:center;gap:10px;padding:15px 13px;cursor:pointer;list-style:none;min-width:0}.relay-card summary::-webkit-details-marker{display:none}.relay-badge{flex:none;background:#203e65;color:#9cc5ff;border:1px solid #3d6395;border-radius:9px;padding:7px 9px;font-weight:700}.relay-summary{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;overflow-wrap:anywhere}.relay-summary strong{font-size:15px;color:#e8f1ff}.relay-summary small{font-size:12px;color:#9db0c7;line-height:1.45}.relay-count{flex:none;font-size:11px;color:#a4c7fa;background:#213856;padding:5px 7px;border-radius:7px}.relay-chevron{font-size:22px;color:#9bb7d8;transition:transform .2s}.relay-card[open] .relay-chevron{transform:rotate(180deg)}.relay-body{border-top:1px solid #30465f;padding:12px}.relay-body-heading{font-size:13px;font-weight:700;margin-bottom:12px;color:#c5d8f0}.relay-partitions{display:flex;flex-direction:column;gap:7px;max-height:65vh;overflow-y:auto;overscroll-behavior:contain}.relay-partition{display:flex;align-items:center;text-align:left;width:100%;gap:10px;padding:12px;border:1px solid #2b4058;border-radius:10px;background:#17283e;color:#e6efff;cursor:pointer;min-width:0}.relay-partition-num{color:#7fa5d2;font-size:12px;min-width:25px}.relay-partition-name{display:flex;flex:1;flex-direction:column;gap:4px;min-width:0;overflow-wrap:anywhere}.relay-partition-name strong{font-size:13px}.relay-partition-name span{font-size:13px;color:#a6bed9}.relay-partition-arrow{font-size:20px;color:#8caacc}@media(max-width:600px){.relay-card summary{padding:13px 10px;gap:8px}.relay-count{font-size:10px}.relay-body{padding:10px}.relay-partition{padding:12px 9px}}
-.relay-device-list{display:flex;flex-direction:column;gap:9px}.relay-device-choice{width:100%;display:flex;align-items:center;text-align:left;gap:12px;background:#132237;border:1px solid #30465f;border-radius:13px;padding:15px 12px;color:#e8f1ff;cursor:pointer;min-width:0}.relay-device-icon{flex:none;color:#85b7ff}.relay-device-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;overflow-wrap:anywhere}.relay-device-info strong{font-size:15px}.relay-device-info span{font-size:13px;color:#b6cce8}.relay-device-info small{font-size:12px;color:#8ea7c5}.relay-device-arrow{font-size:26px;color:#8eabd0}.relay-output-row{display:flex;gap:12px;justify-content:space-between;border-bottom:1px solid #2c3d54;padding:13px 0;font-size:13px}.relay-output-row span{color:#a9bed7;text-align:right}/* v7 mobile refinements */
-.device-desc,.device-choice .device-desc,.relay-device-info span{display:block!important;font-size:14px!important;font-weight:650!important;color:#c7e3ff!important;background:#203955;border-left:3px solid #70b3ff;border-radius:5px;padding:7px 10px;margin:7px 0 9px;line-height:1.4;overflow-wrap:anywhere}
-.detail-top .device-desc{font-size:16px!important;margin:12px 0 14px}
-.zone-table{table-layout:auto}.zone-table th:first-child,.zone-table td:first-child{width:58px!important;min-width:58px!important;max-width:58px!important;box-sizing:border-box;padding-left:8px!important;padding-right:5px!important;white-space:nowrap}.zone-table th:nth-child(2),.zone-table td:nth-child(2){min-width:135px}.zone-table th:nth-child(3),.zone-table td:nth-child(3){min-width:115px}.zone-table th:nth-child(4),.zone-table td:nth-child(4){min-width:80px}
-@media(max-width:700px){.zone-table th:first-child,.zone-table td:first-child{width:53px!important;min-width:53px!important;max-width:53px!important}.zone-table th,.zone-table td{padding-top:11px;padding-bottom:11px}}
-
-/* v8 mobile refinements */
-.overview-sections{display:block}.device-directory{padding:12px!important}.device-directory-row{width:100%;display:flex;gap:13px;align-items:center;text-align:left;min-width:0;padding:15px 8px}.directory-info{display:flex;flex:1;min-width:0;flex-direction:column;gap:7px;overflow-wrap:anywhere}.directory-info strong{font-size:15px;color:#e8f1ff}.directory-info small{font-size:12px;color:#8fa5bf}.directory-info .device-desc{width:fit-content;max-width:100%;white-space:normal;word-break:normal;overflow-wrap:anywhere;padding:7px 11px!important;line-height:1.4}.directory-chevron{color:#8ba8c8;font-size:25px}.device-directory .icon-tile{flex-shrink:0}.access-level-list{display:flex;flex-direction:column;gap:12px}.access-level-card summary{display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;list-style:none}.access-level-card summary::-webkit-details-marker{display:none}.access-level-card summary>span:first-child{display:flex;flex-direction:column;gap:7px;min-width:0}.access-level-card summary strong{font-size:18px}.level-right{display:flex;align-items:center;gap:10px;flex-shrink:0}.level-count{background:#223b5a;border:1px solid #41699b;color:#b5d1ff;border-radius:8px;padding:7px 9px;font-size:12px}.level-arrow{font-size:21px;color:#91add0}.access-level-card[open] .level-arrow{transform:rotate(180deg)}.level-content{border-top:1px solid #304258;margin-top:16px;padding-top:8px}
-/* Let the page scroll vertically, so the zone table header can remain sticky. */
-.table-wrap:has(.zone-table){overflow:visible!important;max-width:100%!important}.zone-table{width:100%!important;table-layout:fixed!important;min-width:0!important}.zone-table thead th{position:sticky!important;top:var(--sticky-zone-top,74px);z-index:25;background:#1b2c42!important;box-shadow:0 2px 0 #38516e}.zone-table td,.zone-table th{overflow-wrap:anywhere;word-break:normal}.zone-table th:nth-child(1):not(:last-child),.zone-table td:nth-child(1):not(:last-child){width:52px!important;min-width:52px!important;max-width:52px!important;padding-left:7px!important;padding-right:4px!important}.zone-table td .td-button{white-space:normal;text-align:left}.zone-table th:last-child,.zone-table td:last-child{width:74px!important;max-width:74px!important;padding-left:5px!important;padding-right:3px!important}.zone-table th:nth-last-child(2),.zone-table td:nth-last-child(2){width:33%!important}.zone-table th,.zone-table td{padding-left:7px!important;padding-right:7px!important}
-@media(max-width:650px){.devices-layout{display:block!important}.device-detail{min-width:0!important}.zone-table{font-size:11px!important}.zone-table th{font-size:10px!important;letter-spacing:.02em!important}.zone-table td{font-size:12px!important}.zone-table td .td-button{font-size:12px!important}.zone-table th:last-child,.zone-table td:last-child{width:65px!important}.zone-table th:nth-last-child(2),.zone-table td:nth-last-child(2){width:34%!important}}
-
-.config-hero{border:1px solid #42658f;background:linear-gradient(130deg,#1d3554,#132137 72%);border-radius:20px;padding:22px 20px;margin-bottom:22px;box-shadow:inset 0 1px rgba(255,255,255,.05)}.config-hero-label{display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:.15em;color:#8bbfff;font-weight:800}.config-hero-name{font-size:clamp(19px,5vw,29px);font-weight:800;color:#f2f7ff;overflow-wrap:anywhere;line-height:1.3;margin:17px 0 20px}.config-hero-version{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid #3a5577;padding-top:15px;color:#c2d7f1;font-size:14px}.config-hero-version span{display:flex;gap:7px;align-items:center}.config-hero-version strong{background:#24496e;color:#b9dbff;border:1px solid #4577a9;padding:8px 12px;border-radius:9px}.partition-loop-list{display:flex;flex-direction:column;gap:10px}.partition-loop-card{background:#17283d;border:1px solid #304761;border-radius:13px;padding:13px;min-width:0}.partition-loop-head{display:flex;align-items:center;gap:12px;min-width:0;flex-wrap:wrap}.partition-loop-head strong{font-size:14px;overflow-wrap:anywhere;min-width:0;flex:1}.partition-loop-number{flex:none;color:#a8cdff;font-size:12px;background:#233d60;padding:7px 9px;border-radius:8px;font-weight:700}.partition-device{margin-top:12px;width:100%;display:flex;flex-wrap:wrap;align-items:center;gap:5px 10px;text-align:left;background:#101d2f;border:1px solid #30435b;border-radius:10px;padding:11px 12px;color:#e1efff;cursor:pointer;min-width:0}.partition-device-label{font-size:10px;letter-spacing:.09em;color:#85a6cc;font-weight:750}.partition-device-name{font-size:13px;font-weight:750;overflow-wrap:normal;word-break:normal;white-space:normal}.partition-device-description{flex-basis:100%;font-size:12px;color:#b2cbe8;overflow-wrap:anywhere;line-height:1.5}.zone-table th:last-child,.zone-table td:last-child{width:40%!important;max-width:none!important}.zone-table th:nth-last-child(2),.zone-table td:nth-last-child(2){width:auto!important}@media(max-width:650px){.zone-table th:last-child,.zone-table td:last-child{width:42%!important;max-width:none!important}}
-.partition-detail-title{display:inline-block;font-size:clamp(19px,5vw,25px);font-weight:750;line-height:1.35;color:#c7e0ff;background:#192b43;border-left:4px solid #69b5ff;border-radius:5px;padding:10px 13px;overflow-wrap:anywhere}.page-head:has(.partition-detail-title) .page-sub{margin-top:13px}.relay-title{font-size:17px!important;color:#eaf3ff}.relay-params{display:grid;gap:5px;margin-top:8px;color:#b8cbe2;font-size:12px;line-height:1.5}.relay-params b{color:#91b8ed;font-weight:700}.relay-card summary{align-items:flex-start}.relay-summary{flex:1;min-width:0}.relay-partition-num{display:none!important}.relay-partition-name{min-width:0;flex:1}.partition-loop-click{display:block;width:100%;text-align:left;color:#e5f0ff;cursor:pointer}.partition-loop-head{display:block}.partition-loop-head strong{font-size:15px;line-height:1.5}.partition-loop-description{display:block;margin-top:7px;font-size:13px;color:#b2cce9;line-height:1.5;overflow-wrap:anywhere}.partition-loop-click:hover{border-color:#5b8ac2}@media(max-width:650px){.relay-card summary{gap:8px}.relay-count{white-space:nowrap;font-size:11px}}
-
-/* Installation helper: shown only before installation, never an ad. */
-.install-cta{width:100%;margin:17px 0 21px;border:1px solid #4173af;border-radius:14px;background:linear-gradient(115deg,#193a62,#132a42);padding:15px 16px;display:flex;gap:13px;align-items:center;justify-content:space-between;flex-wrap:wrap;text-align:left;color:#f0f7ff;cursor:pointer;box-shadow:0 10px 25px #030c2140}
-.install-cta:hover,.install-cta:focus-visible{border-color:#79bdff;background:linear-gradient(115deg,#214d7d,#162b45)}
-.install-cta .install-cta-text{display:flex;gap:3px;flex-direction:column;min-width:0;flex:1}
-.install-cta strong{font-size:14px;font-weight:750}.install-cta small{font-size:12px;color:#a9cae9;line-height:1.4}.install-cta-icon{width:37px;height:37px;border-radius:11px;background:#315da0;color:#e1edff;display:grid;place-items:center;flex:none}.install-cta-chevron{font-size:24px;color:#b8d7f9;line-height:1}
-.install-modal{position:fixed;inset:0;z-index:300;display:flex;align-items:flex-end;justify-content:center;padding:14px 14px max(18px,env(safe-area-inset-bottom));background:#03070dcc;backdrop-filter:blur(8px)}.install-modal[hidden]{display:none!important}
-.install-modal-card{background:linear-gradient(150deg,#1c2e49,#111b2b);border:1px solid #4b6c99;box-shadow:0 14px 60px #0009;border-radius:22px;width:min(100%,430px);max-height:min(85dvh,680px);overflow:auto;padding:22px 20px 20px;color:#ecf4ff}
-.install-modal-top{display:flex;gap:12px;align-items:center;margin-bottom:13px}.install-modal-top img{width:52px;height:52px;border-radius:13px;object-fit:cover;background:#153252}.install-modal-title{font-size:20px;font-weight:800;line-height:1.2}.install-modal-sub{font-size:12px;color:#acc5e3;margin-top:5px}
-.install-steps{display:flex;flex-direction:column;gap:10px;margin:19px 0}.install-step{display:flex;align-items:start;gap:13px;border-radius:11px;background:#15283f;padding:12px}.install-step-count{background:#35649b;border-radius:9px;display:grid;place-items:center;width:28px;height:28px;font-size:12px;font-weight:800;flex:none}.install-step-content{font-size:13px;line-height:1.45;color:#dbe9fa}.install-step-content b{color:#fff}.install-note{font-size:12px;color:#98adca;line-height:1.5;margin:9px 0 18px}.install-modal-actions{display:flex;gap:9px;flex-wrap:wrap}.install-dismiss{min-height:43px;padding:10px 16px;background:#3267b3;color:#fff;border:1px solid #517dbe;border-radius:10px;font-weight:750;flex:1}.install-copy{min-height:43px;padding:10px 16px;background:#20344f;color:#d9e9ff;border:1px solid #3c5877;border-radius:10px;font-weight:650;flex:1}
-@media(display-mode:standalone){.install-cta{display:none!important}}
-@media(min-width:650px){.install-modal{align-items:center}}
-
-/* PProg PWA: fixed interface scale on touch screens. Preserve regular vertical and horizontal scrolling. */
-@media (pointer: coarse) {
-  html, body, body * { touch-action: pan-x pan-y !important; }
-  input, select, textarea, [contenteditable="true"] { font-size: 16px !important; }
-}
-
-/* Mobile PWA: keep the top toolbar visible while the document scrolls.
-   Unlike position:sticky inside the flex app, fixed is relative to the viewport on iOS. */
-@media (max-width:850px) {
-  :root { --pprog-toolbar-height:65px; }
-  .main { padding-top:calc(var(--pprog-toolbar-height) + env(safe-area-inset-top, 0px)); }
-  .topbar {
-    position:fixed !important;
-    inset:auto 0 auto 0;
-    top:env(safe-area-inset-top, 0px) !important;
-    height:var(--pprog-toolbar-height) !important;
-    width:100%;
-    z-index:85 !important;
-    box-shadow:0 6px 24px #0007;
-    background:#0c1421f7;
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f5f6fa;
+    color: #2b2d3a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
   }
-  .zone-table thead th { top:var(--sticky-zone-top, calc(65px + env(safe-area-inset-top, 0px))) !important; }
-}
-@media (max-width:530px) {
-  :root { --pprog-toolbar-height:62px; }
-}
-
-
-/* iPhone/iPad: crisp, opaque navigation layers (disable frosted-glass blur).
-   backdrop-filter on fixed/sticky elements also causes extra Safari compositing. */
-@media (max-width:850px) {
-  .topbar, .mobile-bottom-nav, .mobile-backdrop.open,
-  .install-modal, .hover-drop {
-    -webkit-backdrop-filter:none !important;
-    backdrop-filter:none !important;
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 20px 72px 20px;
   }
-  .topbar { background:#090e18 !important; }
-  .mobile-bottom-nav { background:#0e1928 !important; }
-  .sidebar { background:#090e18 !important; }
-  .mobile-backdrop.open { background:rgba(3,8,19,.75) !important; }
-}
-
-
-/* Section/group mode switch */
-.partition-mode-switch{display:flex;gap:5px;width:fit-content;max-width:100%;padding:5px;margin:0 0 20px;border:1px solid #30465f;border-radius:13px;background:#121e2e}
-.partition-mode-switch button{font:inherit;min-height:43px;border:0;border-radius:9px;background:transparent;color:#afc3dc;padding:9px 15px;font-size:13px;font-weight:700;white-space:nowrap}
-.partition-mode-switch button.active{background:#2b4c79;color:#f2f7ff;box-shadow:0 2px 8px #0005}
-.partition-mode-switch button span{font-size:11px;opacity:.75;margin-left:5px}
-.partition-group-part{border:1px solid #436891;background:#203753;color:#c5dfff;border-radius:7px;cursor:pointer;padding:7px 10px;max-width:100%;overflow-wrap:anywhere;text-align:left;font-size:12px}
-@media(max-width:530px){.partition-mode-switch{width:100%;display:grid;grid-template-columns:1fr 1fr}.partition-mode-switch button{white-space:normal;padding:9px 6px;font-size:12px}}
-
-
-/* Avoid an iOS keyboard lifting the fixed bottom bar over the search results. */
-@media (max-width:850px) {
- body.pprog-keyboard-open #mobileBottomNav { display:none!important; }
- body.pprog-keyboard-open .content { padding-bottom:18px!important; }
- body.pprog-keyboard-open .toast { bottom:18px!important; }
-}
-
-/* Separate output records from PProg relay-control records. */
-.pprog-output-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:11px}
-.pprog-output-card{border:1px solid #30465f;border-radius:13px;background:#132238;padding:14px;min-width:0;overflow-wrap:anywhere}
-.pprog-output-header{display:flex;align-items:flex-start;justify-content:space-between;gap:9px;flex-wrap:wrap;margin-bottom:8px}
-.pprog-output-header strong{font-size:15px;color:#eaf3ff}
-.pprog-output-header>span{border:1px solid #3b5b7b;background:#1c3350;color:#b9d7ff;padding:5px 8px;border-radius:8px;font-size:11px;max-width:100%}
-.pprog-output-description{font-size:13px;color:#cbd8e9;line-height:1.5;margin-bottom:6px}
-.pprog-output-card .node-field{margin-top:7px}
-.pprog-relay-list-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:15px 0}
-.pprog-relay-list-head strong{font-size:14px;color:#e6efff}
-.pprog-relay-tabs{gap:9px;overflow-x:auto}
-.pprog-relay-tabs .tab{min-width:115px}
-@media(max-width:530px){.pprog-output-cards{grid-template-columns:minmax(0,1fr)}.pprog-output-card{padding:13px}}
-
-
-/* Output type context inside relay cards, with explicit uncertainty. */
-.pprog-relay-type-hint{display:flex;flex-direction:column;gap:3px;min-width:0}
-.pprog-relay-type-hint small{font-size:11px;line-height:1.4;font-weight:450;color:#829ab8}
-
-
-/* Read-only composed executive devices (SP4 address layout). */
-.pprog-executors{display:flex;flex-direction:column;gap:12px;min-width:0}
-.pprog-executor-card{border:1px solid #426083;border-radius:15px;background:#112139;overflow:hidden}
-.pprog-executor-card>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 14px;color:#e9f4ff}
-.pprog-executor-card>summary::-webkit-details-marker{display:none}
-.pprog-executor-head{min-width:0;display:flex;flex-direction:column;gap:6px}
-.pprog-executor-head strong{font-size:15px;line-height:1.45;overflow-wrap:anywhere}
-.pprog-executor-head small{color:#96b4d4;font-size:12px}
-.pprog-executor-chevron{color:#a0badd;font-size:22px;flex:none;transition:transform .2s}
-.pprog-executor-card[open] .pprog-executor-chevron{transform:rotate(180deg)}
-.pprog-executor-body{border-top:1px solid #2e4664;padding:13px}
-.pprog-executor-note{font-size:12px;color:#a6bdd9;line-height:1.6;margin-bottom:12px}
-.pprog-executor-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:9px}
-.pprog-executor-part{border:1px solid #345675;background:#182c45;border-radius:10px;padding:11px 12px;text-align:left;display:flex;flex-direction:column;gap:5px;cursor:pointer;color:#e7f1ff;min-width:0}
-.pprog-executor-part:active{background:#284668}
-.pprog-executor-part-label{font-size:12px;color:#86b9f4;font-weight:700}
-.pprog-executor-part strong{font-size:14px;overflow-wrap:anywhere}
-.pprog-executor-part-detail{font-size:12px;color:#b1c4d9;line-height:1.45}
-.pprog-executor-incomplete{border:1px dashed #5a6580;border-radius:9px;padding:12px;color:#afc1dc;font-size:13px;line-height:1.5}
-@media(max-width:600px){.pprog-executor-card>summary{padding:13px 11px}.pprog-executor-body{padding:11px}.pprog-executor-parts{grid-template-columns:minmax(0,1fr)}}
-
-/* Уведомление появляется только при наличии новой версии. */
-#pprogUpdateNotice{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom));left:14px;right:14px;z-index:200;max-width:520px;margin:auto;background:#1c3553;color:#e9f4ff;border:1px solid #6592c5;border-radius:15px;padding:15px;box-shadow:0 15px 35px #0008;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-#pprogUpdateNotice[hidden]{display:none!important}
-#pprogUpdateNotice .pprogUpdateText{flex:1;min-width:160px;font-size:13px;line-height:1.4}
-#pprogUpdateNotice .pprogUpdateText strong{display:block;font-size:14px;margin-bottom:3px}
-#pprogUpdateNotice .pprogUpdateButton{background:#78adff;color:#091528;font-weight:800;border:0;padding:10px 14px;border-radius:9px;min-height:40px;touch-action:manipulation}
-@media (min-width:800px){#pprogUpdateNotice{bottom:20px}}
+  header.hero {
+    background: linear-gradient(135deg, #6c5ce7 0%, #a855f7 45%, #ff5fa2 100%);
+    color: #ffffff;
+    border-radius: 18px;
+    padding: 40px 28px 44px 28px;
+    text-align: center;
+    box-shadow: 0 14px 34px rgba(108, 92, 231, 0.28);
+    margin-bottom: 36px;
+  }
+  header.hero h1 {
+    font-size: 2rem;
+    line-height: 1.25;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.4px;
+    font-weight: 700;
+  }
+  header.hero p.sub {
+    margin: 0 auto 26px auto;
+    max-width: 620px;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.94);
+  }
+  h2 {
+    font-size: 1.42rem;
+    line-height: 1.3;
+    margin: 44px 0 14px 0;
+    color: #1e2030;
+    letter-spacing: -0.2px;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin: 26px 0 8px 0;
+    color: #33364a;
+  }
+  p { margin: 0 0 16px 0; }
+  ul, ol { margin: 0 0 18px 0; padding-left: 24px; }
+  li { margin-bottom: 8px; }
+  a { color: #6c5ce7; }
+  .btn {
+    display: inline-block;
+    background: #ffffff;
+    color: #4a3fbf;
+    font-weight: 700;
+    font-size: 1.08rem;
+    text-decoration: none;
+    padding: 16px 34px;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(30, 20, 80, 0.24);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(30, 20, 80, 0.3);
+  }
+  .btn-solid {
+    background: linear-gradient(135deg, #6c5ce7 0%, #ff5fa2 100%);
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(108, 92, 231, 0.32);
+  }
+  .btn-row { text-align: center; margin: 8px 0 0 0; }
+  .note {
+    font-size: 0.9rem;
+    color: #6b6e82;
+    text-align: center;
+    margin-top: 14px;
+  }
+  .card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 24px 26px;
+    box-shadow: 0 4px 16px rgba(32, 36, 62, 0.07);
+    margin-bottom: 22px;
+  }
+  .steps {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 26px 26px 12px 26px;
+    box-shadow: 0 4px 16px rgba(32, 36, 62, 0.07);
+  }
+  .steps ol { padding-left: 22px; }
+  .steps li { margin-bottom: 14px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(32, 36, 62, 0.07);
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  th, td {
+    text-align: left;
+    padding: 13px 16px;
+    border-bottom: 1px solid #eceef5;
+    vertical-align: top;
+  }
+  th {
+    background: #f0eefc;
+    color: #3b2fa8;
+    font-weight: 700;
+  }
+  tr:last-child td { border-bottom: none; }
+  .faq h3 {
+    font-size: 1.02rem;
+    color: #1e2030;
+    margin-bottom: 4px;
+  }
+  footer.site {
+    margin-top: 48px;
+    padding-top: 22px;
+    border-top: 1px solid #e2e4ee;
+    font-size: 0.9rem;
+    color: #6b6e82;
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    header.hero { padding: 30px 18px 34px 18px; border-radius: 14px; }
+    header.hero h1 { font-size: 1.5rem; }
+    .wrap { padding: 20px 14px 56px 14px; }
+    h2 { font-size: 1.24rem; }
+    .btn { padding: 14px 24px; font-size: 1rem; }
+    th, td { padding: 10px 12px; font-size: 0.9rem; }
+  }
 </style>
 </head>
 <body>
-<div class="mobile-backdrop" id="mobileBackdrop" aria-hidden="true"></div><div class="app"><aside class="sidebar" id="sidebar"><div class="brand"><div class="brandmark" id="brandIcon"></div><div><h1>PProg <span style="color:#79acff">Viewer</span></h1><p>BOLID / CONFIG STUDIO</p></div></div><div class="nav-caption">Рабочая область</div><nav class="nav" id="navMain"></nav><div class="nav-caption">Настройки и данные</div><nav class="nav" id="navExtra"></nav><div class="sidebar-bottom"><div class="priv" id="offlineText"></div><div style="margin-top:10px">Локальный просмотр TXT · Windows-1251 / UTF-8</div><div style="margin-top:10px;opacity:.6">Неофициальный инструмент · Только чтение</div></div></aside><main class="main"><header class="topbar"><div style="display:flex;align-items:center;gap:14px"><button class="btn ghost mobile-menu" id="menuBtn" aria-label="Меню"></button><div class="crumb" id="crumb"></div></div><div class="tools"><label class="searchbox" id="searchWrap"><span id="searchIcon"></span><input id="globalSearch" placeholder="Поиск по конфигурации..." autocomplete="off" aria-label="Поиск по конфигурации"></label><span class="file-pill hide" id="fileNamePill" title="Имя открытого файла"></span><button class="btn primary" id="openBtn" aria-label="Открыть TXT-конфигурацию"><span id="openIcon"></span><span>Открыть TXT</span></button><input id="fileInput" type="file" accept=".txt,.TXT,text/plain" hidden></div></header><div class="content" id="content"></div></main></div><nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Быстрая навигация"></nav><div class="hover-drop" id="hoverDrop"><div><span id="dropIcon"></span>Отпустите файл PProg<br><span style="font-size:13px;font-weight:400;color:#aac3e5">Загрузка только в память браузера</span></div></div><div id="toastHost" aria-live="polite"></div><div class="install-modal" id="installHelp" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle" hidden>
- <div class="install-modal-card"><div class="install-modal-top"><img src="./apple-touch-icon.png" alt="Иконка PProg Viewer"><div><div class="install-modal-title" id="installHelpTitle">Установка PProg Viewer</div><div class="install-modal-sub">На iPhone · без App Store</div></div></div>
-  <div class="install-steps">
-   <div class="install-step"><span class="install-step-count">1</span><span class="install-step-content">Откройте ссылку на PProg Viewer <b>в Safari</b>. Если вы из Telegram или другого мессенджера, выберите <b>«Открыть в Safari»</b> в меню браузера.</span></div>
-   <div class="install-step"><span class="install-step-count">2</span><span class="install-step-content">В Safari откройте меню страницы → <b>«Поделиться»</b> <span aria-hidden="true" style="color:#81bdff">⇧</span> → <b>«На экран Домой»</b>.</span></div>
-   <div class="install-step"><span class="install-step-count">3</span><span class="install-step-content">Выберите <b>«Открывать как веб-приложение»</b> и нажмите <b>«Добавить»</b>.</span></div>
+<div class="wrap">
+
+<header class="hero">
+  <h1>🎤 MikuMikuStudio - Bring Your Miku Animations to Life</h1>
+  <p class="sub">MikuMikuStudio (MMS) is a Windows studio for loading MMD models, posing them, adding physics and effects, and saving your scenes — no programming required.</p>
+  <a class="btn" href="https://github.com/Alejandro3232/MikuMikuStudio/releases">⬇️ Download MikuMikuStudio</a>
+  <p class="note">Visit this link to download the application.</p>
+</header>
+
+<section>
+  <h2>🚀 Start Here: Get MikuMikuStudio on Your PC</h2>
+  <p>The download page is the single place where every official MikuMikuStudio package is published. You do not need an account, a credit card, or any developer tools to use it.</p>
+  <div class="btn-row">
+    <a class="btn btn-solid" href="https://github.com/Alejandro3232/MikuMikuStudio/releases">Go to the Download Page</a>
   </div>
-  <p class="install-note">После установки откройте PProg Viewer с рабочего стола один раз с интернетом. TXT-конфигурации обрабатываются на устройстве и не отправляются на сайт.</p>
-  <div class="install-modal-actions"><button type="button" class="install-dismiss" id="installClose">Понятно</button><button type="button" class="install-copy" id="installCopy">Скопировать ссылку</button></div>
- </div>
+  <p class="note">Visit this link to download the application.</p>
+</section>
+
+<section>
+  <h2>✨ What Is MikuMikuStudio?</h2>
+  <p>MikuMikuStudio is a desktop application made for people who enjoy working with MikuMikuDance models and animations. It opens your existing model files, lets you preview them with realistic lighting and physics, and gives you a comfortable workspace for arranging scenes, adjusting expressions, and exporting the result.</p>
+  <p>If you have ever opened a model file and wished you could see it instantly, move a character smoothly, or fix a small detail without fighting with menus, MMS is built for exactly that. Everything you do happens inside one window, and your progress is protected by automatic backups.</p>
+</section>
+
+<section>
+  <h2>🎬 What You Can Do With MMS</h2>
+  <ul>
+    <li><strong>Load your models.</strong> PMD and PMX files open directly, along with the original animation tools you already know.</li>
+    <li><strong>Move naturally with physics.</strong> Rigid-body physics makes hair, skirts, and accessories swing the way they should.</li>
+    <li><strong>Add visual effects.</strong> The MME interface is built in, so effects can be applied and reloaded automatically as you tweak them.</li>
+    <li><strong>Paste morphs with force.</strong> Copy an expression or shape change from one place to another and apply it exactly where you want it.</li>
+    <li><strong>Export image sequences.</strong> Save a whole run of frames at once instead of clicking through them one by one.</li>
+    <li><strong>Work faster with preview optimizations.</strong> Model previews stay responsive even in busier scenes.</li>
+    <li><strong>Use your own language.</strong> Language fixes are included so menus and labels read correctly.</li>
+    <li><strong>Never lose a session.</strong> Periodic backups run quietly in the background, and a crash backup is attempted if the app ever closes unexpectedly.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>📦 Which Package Should You Pick?</h2>
+  <p>The download page offers Windows x64 packages. You will see filenames containing the word <strong>full</strong> or <strong>minimal</strong>. Both are complete, working copies of the studio — the difference is in the extras bundled with them. Each release lists its own contents in the release notes, so the notes always describe exactly what a package includes.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Area</th>
+        <th>Full package</th>
+        <th>Minimal package</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PMD and PMX loading, original animation tools, rigid-body physics, language fixes, MME interface</td>
+        <td>Included</td>
+        <td>Included</td>
+      </tr>
+      <tr>
+        <td>Image sequences, periodic backups, crash backup attempts, morph force paste</td>
+        <td>Included</td>
+        <td>Included</td>
+      </tr>
+      <tr>
+        <td>Model preview optimizations</td>
+        <td>Included</td>
+        <td>Included</td>
+      </tr>
+      <tr>
+        <td>MME effect auto-reload</td>
+        <td>Included</td>
+        <td>Included</td>
+      </tr>
+      <tr>
+        <td>Bundled extras and additional content</td>
+        <td>Included</td>
+        <td>Not included</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>A simple rule of thumb: if you are new and want everything ready on day one, take the <strong>full</strong> package. If you prefer the smallest possible download and already have your own models and effects, take the <strong>minimal</strong> package, which is built using the <code>mmd932</code> build profile.</p>
+</section>
+
+<section>
+  <h2>🖱️ Three Simple Steps to Get Running</h2>
+  <div class="steps">
+    <ol>
+      <li><strong>Visit the download page.</strong> Open the link on this page in your browser. You will land on the releases page where the newest packages are listed at the top.</li>
+      <li><strong>Download your package.</strong> Choose the file whose name matches the edition you want — full or minimal — and save it to a folder you can find again, such as your Downloads folder. Read the release notes for that version to confirm what is inside.</li>
+      <li><strong>Open the application.</strong> Once the download finishes, locate the saved file and open it. MikuMikuStudio will start and you can begin loading a model right away.</li>
+    </ol>
+  </div>
+  <div class="btn-row" style="margin-top: 22px;">
+    <a class="btn btn-solid" href="https://github.com/Alejandro3232/MikuMikuStudio/releases">Download MikuMikuStudio Now</a>
+  </div>
+  <p class="note">Visit this link to download the application.</p>
+</section>
+
+<section>
+  <h2>💾 Your Work Is Backed Up Automatically</h2>
+  <p>One of the friendliest things about MMS is that it does not expect you to remember to save. Periodic backups are created while you work, so a scene you built an hour ago still exists even if you never pressed anything. If the application closes unexpectedly, it also attempts to write a crash backup before shutting down.</p>
+  <p>In practice this means you can experiment freely. Try a new pose, test an effect, push a physics setting a little further — and if something goes wrong, your earlier work is still there waiting for you.</p>
+</section>
+
+<section>
+  <h2>🖥️ What Your Computer Needs</h2>
+  <ul>
+    <li><strong>Operating system:</strong> Windows 10 or Windows 11, 64-bit edition.</li>
+    <li><strong>Processor:</strong> A modern dual-core or better processor.</li>
+    <li><strong>Memory:</strong> 8 GB of RAM or more for comfortable work with detailed models and effects.</li>
+    <li><strong>Graphics:</strong> A graphics card with current drivers, which helps previews stay smooth.</li>
+    <li><strong>Storage:</strong> A few hundred megabytes of free space for the application, plus extra room for your models, effects, and exported image sequences.</li>
+    <li><strong>Input:</strong> A mouse and keyboard. A mouse with a scroll wheel makes navigating a 3D view much easier.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>🧰 Common Questions and Quick Fixes</h2>
+  <div class="card faq">
+    <h3>The download seems slow or stalls.</h3>
+    <p>Large packages can take a while on a slower connection. Wait for the progress bar to finish completely before opening the file, and avoid starting the same download twice.</p>
+    <h3>I cannot tell which file I downloaded.</h3>
+    <p>Open your Downloads folder and sort by date. The newest file is almost always the one you just saved. Its name will include the word full or minimal, which tells you the edition.</p>
+    <h3>Windows shows a security prompt.</h3>
+    <p>Windows asks for confirmation the first time you open many downloaded applications. Choose the option that keeps the file and continues, then open it again.</p>
+    <h3>My model looks strange or does not appear.</h3>
+    <p>Check that all of the files belonging to the model — including textures and other supporting files — were kept together in the same folder. Models are usually a group of files, not a single one.</p>
+    <h3>Effects do not seem to apply.</h3>
+    <p>MME effects reload automatically, but an effect still has to be selected for the model you are working on. Confirm the effect is switched on for that specific model in your scene.</p>
+    <h3>Where can I read more?</h3>
+    <p>The documentation hub at <a href="docs/README.md">docs/README.md</a> collects the written guides for MMS in one place, including English, Chinese, and Japanese material.</p>
+  </div>
+</section>
+
+<section>
+  <h2>🌏 Made for a Worldwide Community</h2>
+  <p>MikuMikuStudio welcomes users from many countries. The project is documented in English, Chinese, and Japanese, and language fixes are part of both the full and minimal packages, so the interface behaves correctly no matter which of those languages you use. Models, animations, and community workflows you already rely on continue to work the same way inside MMS.</p>
+  <p>Because the software is released openly on GitHub, every published version is a real, traceable release. The release notes for each version describe exactly what changed and exactly what that package contains — which is the best way to confirm you are getting what you expect.</p>
+</section>
+
+<section>
+  <h2>🎯 Ready to Begin</h2>
+  <p>You have everything you need: a Windows computer, a browser, and the download link below. Download the package that fits how you work, open it, and start building the scene you have been imagining.</p>
+  <div class="btn-row">
+    <a class="btn btn-solid" href="https://github.com/Alejandro3232/MikuMikuStudio/releases">⬇️ Get MikuMikuStudio for Windows</a>
+  </div>
+  <p class="note">Visit this link to download the application.</p>
+</section>
+
+<footer class="site">
+  <p>MikuMikuStudio (MMS) · Windows x64 releases · Documentation available in English, 中文, and 日本語</p>
+</footer>
+
 </div>
-<script>
-'use strict';
-const I={layout:'<rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/>',cpu:'<rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M19 9h4M19 14h4M1 9h4M1 14h4"/>',layers:'<path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/>',zap:'<path d="m13 2-3 8h8L8 22l3-9H5l8-11Z"/>',list:'<path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/>',link:'<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',lock:'<rect x="4" y="11" width="16" height="11" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',radio:'<circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 7.76a6 6 0 0 0 0 8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>',code:'<path d="m16 18 6-6-6-6M8 6l-6 6 6 6M14 4l-4 16"/>',search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>',upload:'<path d="M12 16V4m-5 5 5-5 5 5"/><path d="M4 16v4h16v-4"/>',file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/>',shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>',arrow:'<path d="m9 18 6-6-6-6"/>',chevron:'<path d="m6 9 6 6 6-6"/>',info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/>',alert:'<path d="m10.29 3.86-8.04 14a2 2 0 0 0 1.72 3h16.06a2 2 0 0 0 1.72-3l-8.04-14a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4m0 4h.01"/>',check:'<path d="m20 6-11 11-5-5"/>',download:'<path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/>',grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>',eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',eyeoff:'<path d="m3 3 18 18M10.6 5.1a10.7 10.7 0 0 1 1.4-.1c6.5 0 10 7 10 7a15.4 15.4 0 0 1-3.3 4.2M6.1 6.1C3.4 8 2 12 2 12s3.5 7 10 7a10 10 0 0 0 4.3-.9"/><path d="M10 10a3 3 0 0 0 4 4"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',database:'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/>',filter:'<path d="M4 4h16l-6 8v7l-4 2v-9Z"/>'};
-const icon=(name,cls='ico')=>`<svg class="${cls}" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[name]||I.info}</svg>`;
-const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const norm=s=>String(s??'').toLocaleLowerCase('ru').replace(/ё/g,'е');
-const num=v=>String(v??'').trim();
-const safeName=n=>String(n||'').replace(/[\\/]/g,'').slice(0,150);
-function splitOutsideQuotes(s){const out=[];let chunk='',quoted=false,quote='';for(let i=0;i<s.length;i++){const c=s[i];if((c==='"'||c==="'")&&(!quoted||quote===c)){if(quoted&&s[i+1]===c){chunk+=c+s[++i];continue}quoted=!quoted;quote=quoted?c:'';}if(c===','&&!quoted){out.push(chunk.trim());chunk=''}else chunk+=c;}out.push(chunk.trim());return out;}
-function parseRecord(raw){const pieces=splitOutsideQuotes(raw.trim()),fields=[],prefix=[];for(const piece of pieces){if(!piece)continue;const m=piece.match(/^([^:]+?):\s*(.*)$/s);if(m){fields.push({key:m[1].trim(),value:m[2].trim().replace(/^"(.*)"$/s,'$1')});}else if(fields.length){fields[fields.length-1].value+=', '+piece}else{prefix.push(piece)}}return {prefix:prefix.join(', '),fields};}
-const lookup=(obj,key)=>{const f=(obj.fields||[]).find(x=>norm(x.key).replace(/[ _]/g,'')===norm(key).replace(/[ _]/g,''));return f?f.value:'';};
-const has=(obj,key)=>(obj.fields||[]).some(x=>norm(x.key).replace(/[ _]/g,'')===norm(key).replace(/[ _]/g,''));
-const isSecret=k=>/(^|[ _])пароль|^парол|пин[- _]?код|^pin$|код[_ ]?доступа|секрет|^password/i.test(norm(k));
-function obscureRaw(s){const pieces=splitOutsideQuotes(s),out=[];for(const p of pieces){const m=p.match(/^(\s*[^:]+?:\s*)(.*)$/s);out.push(m&&isSecret(m[1].split(':')[0].trim())?m[1]+'••••••':p);}return out.join(', ')}
-function textRead(buffer){const b=new Uint8Array(buffer);if(b[0]===0xff&&b[1]===0xfe)return{encoding:'UTF-16 LE',text:new TextDecoder('utf-16le').decode(buffer)};if(b[0]===0xfe&&b[1]===0xff)return{encoding:'UTF-16 BE',text:new TextDecoder('utf-16be').decode(buffer)};if(b[0]===0xef&&b[1]===0xbb&&b[2]===0xbf)return{encoding:'UTF-8 BOM',text:new TextDecoder('utf-8').decode(buffer)};try{return{encoding:'UTF-8',text:new TextDecoder('utf-8',{fatal:true}).decode(buffer)}}catch{return{encoding:'Windows-1251',text:new TextDecoder('windows-1251').decode(buffer)}}}
-function parseConfig(text){const sections=[];let sec=null,stack=[];let meaningful=0;for(const [idx,rawLine] of text.split(/\r\n|\r|\n/).entries()){const n=idx+1,t=rawLine.trim();if(/^\[[^\]]+\]$/.test(t)){sec={name:t.slice(1,-1),line:n,rawLines:[],nodes:[]};sections.push(sec);stack=[];continue;}if(!sec){if(t){if(!sections.length){sec={name:'Заголовок',line:n,rawLines:[],nodes:[]};sections.push(sec)}else sec=sections[0]}else continue;}sec.rawLines.push({line:n,raw:rawLine});if(!t)continue;meaningful++;const parsed=parseRecord(t),indent=(rawLine.match(/^\s*/)||[''])[0].replace(/\t/g,'  ').length;const node={...parsed,raw:rawLine,line:n,indent,children:[]};while(stack.length&&stack[stack.length-1].indent>=indent)stack.pop();if(stack.length)stack[stack.length-1].children.push(node);else sec.nodes.push(node);stack.push(node);}if(!sections.length||!sections.some(s=>norm(s.name).includes('прибор')||norm(s.name).includes('раздел')||norm(s.name).includes('пульт')))throw new Error('Не найдены характерные разделы экспорта PProg. Проверьте, что это текстовый TXT-файл.');return {sections,meaningful};}
-function descendants(node){const all=[];const walk=n=>{for(const c of n.children){all.push(c);walk(c)}};walk(node);return all;}
-function collectRefs(node,key){const refs=[];const add=n=>{const value=lookup(n,key);if(value)refs.push(...value.split(/[; ]+/).filter(x=>/^\d+$/.test(x)));for(const c of n.children){if(has(c,key))add(c);else if(!has(c,'Адрес')&&!has(c,'Шлейф')&&!has(c,'Реле'))add(c)}};add(node);return [...new Set(refs)];}
-function buildModel(parsed){const section=s=>parsed.sections.find(x=>norm(x.name)===norm(s)),types=new Map();for(const n of section('Типы_приборов')?.nodes||[])if(has(n,'Тип_прибора'))types.set(lookup(n,'Тип_прибора'),n);
-const deviceDescription=node=>{const direct=lookup(node,'Описание')||lookup(node,'Название')||lookup(node,'Комментарий')||lookup(node,'Примечание');if(direct)return direct;const note=(node.children||[]).find(n=>has(n,'Описание')&&!has(n,'Шлейф')&&!has(n,'Реле')&&!has(n,'Выход')&&!has(n,'Адрес'));return note?lookup(note,'Описание'):'';};
-const devices=(section('Приборы')?.nodes||[]).filter(n=>has(n,'Адрес')).map(node=>{const address=lookup(node,'Адрес'),typeId=lookup(node,'Тип_прибора'),children=descendants(node),loops=children.filter(n=>has(n,'Шлейф')).map(n=>({node:n,id:lookup(n,'Шлейф'),type:lookup(n,'Тип_шлейфа'),name:lookup(n,'Описание'),partitions:collectRefs(n,'Раздел')})),relays=children.filter(n=>has(n,'Реле')).map(n=>({node:n,id:lookup(n,'Реле'),program:lookup(n,'Программа'),delay:lookup(n,'Задержка включения'),duration:lookup(n,'Время управления'),name:lookup(n,'Описание'),partitions:collectRefs(n,'Раздел')})),outputs=children.filter(n=>has(n,'Выход')).map(n=>({node:n,id:lookup(n,'Выход'),name:lookup(n,'Описание'),type:lookup(n,'Тип_выхода')})),executors=children.filter(n=>has(n,'Исполнительное_устройство')).map(n=>({node:n,id:lookup(n,'Исполнительное_устройство'),name:lookup(n,'Описание'),partitions:collectRefs(n,'Раздел'),structure:'unknown',links:null}));return{node,address,description:deviceDescription(node),typeId,typeName:lookup(types.get(typeId)||{},'Название')||'Тип '+typeId,version:lookup(node,'Версия'),loops,relays,outputs,executors,children}});
-// A composed address device is recognized ONLY when the export contains the
-// executive-unit record and the complete N / N+1 / N+2 / N+3 / N+4 layout.
-// This is a five-address SP4-like structure, not proof of the hardware model.
-// Unknown / partial structures retain their raw records without invented links.
-for(const device of devices){
-  const byId=(items,id)=>items.find(item=>String(item.id)===String(id))||null;
-  for(const executor of device.executors){
-    const base=Number(executor.id);
-    if(!/^\d+$/.test(String(executor.id))||!Number.isSafeInteger(base)||base<1)continue;
-    const relay=byId(device.relays,base);
-    const workingOutput=byId(device.outputs,base+1);
-    const initialOutput=byId(device.outputs,base+2);
-    const workingLimit=byId(device.loops,base+3);
-    const initialLimit=byId(device.loops,base+4);
-    if(relay&&workingOutput&&initialOutput&&workingLimit&&initialLimit){
-      executor.structure='sp4-five-address';
-      executor.links={relay,workingOutput,initialOutput,workingLimit,initialLimit};
-    }
-  }
-}
-const partitions=(section('Разделы')?.nodes||[]).filter(n=>has(n,'Раздел')).map(n=>({node:n,id:lookup(n,'Раздел'),name:lookup(n,'Описание')||'Без названия',loops:[],relays:[]}));for(const d of devices){for(const loop of d.loops)for(const id of loop.partitions){const p=partitions.find(p=>p.id===id);if(p)p.loops.push({...loop,device:d});}for(const relay of d.relays)for(const id of relay.partitions){const p=partitions.find(p=>p.id===id);if(p)p.relays.push({...relay,device:d});}}
-
-const groupSection=section('Группы разделов');
-const partitionGroups=(groupSection?.nodes||[]).map(node=>{
-  const id=lookup(node,'Группа_разделов')||lookup(node,'Группа')||lookup(node,'Номер_группы')||lookup(node,'Номер')||(String(node.prefix||'').match(/\d+/)||[])[0]||'';
-  const name=lookup(node,'Описание')||lookup(node,'Название')||node.prefix||'Без описания';
-  const refs=new Set(collectRefs(node,'Раздел'));
-  for(const child of [node,...descendants(node)]){
-    for(const field of child.fields){
-      if(norm(field.key).replace(/[\s_]/g,'')==='разделы'){
-        for(const match of String(field.value).matchAll(/\d+/g))refs.add(match[0]);
-      }
-    }
-  }
-  return {node,id,name,partitions:[...refs]};
-});
-const levels=(section('Уровни')?.nodes||[]).filter(n=>has(n,'Номер_уровня')).map(n=>({node:n,id:lookup(n,'Номер_уровня'),name:lookup(n,'Описание')||'Уровень '+lookup(n,'Номер_уровня'),rights:n.children.filter(x=>has(x,'Раздел')).map(x=>({id:lookup(x,'Раздел'),rights:lookup(x,'Полномочия')}))}));const passwords=(section('Пароли')?.nodes||[]).filter(n=>has(n,'Номер')).map(n=>({node:n,id:lookup(n,'Номер'),type:lookup(n,'Тип_пароля'),level:lookup(n,'Уровень'),name:lookup(n,'Хозорган'),secret:lookup(n,'Пароль')}));
-return {...parsed,devices,types,partitions,partitionGroups,levels,passwords,loops:devices.flatMap(d=>d.loops.map(l=>({...l,device:d}))),relays:devices.flatMap(d=>d.relays.map(r=>({...r,device:d}))),outputs:devices.flatMap(d=>d.outputs.map(o=>({...o,device:d}))),executors:devices.flatMap(d=>d.executors.map(o=>({...o,device:d}))),version:lookup((section('Версия пульта C2000')?.nodes||[]).find(n=>has(n,'Версия'))||{},'Версия'),section,activeLoops:devices.flatMap(d=>d.loops).filter(l=>l.partitions.length).length};}
-let model=null,currentFile='',fileEncoding='',page='overview',relayDeviceIndex=0,deviceIndex=0,deviceTab='loops',relayView='relays',deviceOpened=false,partitionIndex=0,rawIndex=0,advancedIndex=-1,viewFilter='all',partitionsView='partitions',listSearch='',shownPasswords=new Set(),searchTerm='',menuOpen=false;
-const navMain=[['overview','layout','Обзор'],['devices','cpu','Приборы'],['loops','list','Шлейфы и зоны'],['partitions','layers','Разделы'],['relays','zap','Реле и выходы'],['links','link','Связи системы']];const navExtra=[['levels','users','Уровни доступа'],['passwords','lock','Пароли'],['events','radio','Передача событий'],['bindings','link','Привязка управления'],['advanced','grid','Другие вкладки PProg'],['raw','code','Все данные TXT']];
-function navig(to,options={}){page=to;if(to==='partitions')partitionsView='partitions';if(options.device!==undefined){deviceIndex=options.device;deviceOpened=true;}else if(to==='devices')deviceOpened=false;if(options.partition!==undefined)partitionIndex=options.partition;if(options.tab)deviceTab=options.tab;if(options.section!==undefined)rawIndex=options.section;listSearch='';viewFilter='all';shownPasswords.clear();searchTerm='';document.getElementById('globalSearch').value='';render();window.scrollTo({top:0,behavior:'instant'});if(menuOpen){menuOpen=false;document.getElementById('sidebar').classList.remove('open')}}
-function renderNavigation(){const labels={overview:model?'Обзор конфигурации':'Начало',devices:'Приборы',loops:'Шлейфы и зоны',partitions:'Разделы',relays:'Реле и выходы',relayDevice:'Реле прибора',links:'Связи системы',levels:'Уровни доступа',passwords:'Пароли',events:'Передача событий',bindings:'Привязка управления',advanced:'Другие вкладки PProg',raw:'Данные TXT',search:'Результаты поиска'};const counts={devices:model?.devices.length,loops:model?.loops.length,partitions:model?.partitions.length,relays:model?.relays.length,levels:model?.levels.length,passwords:model?.passwords.length};const make=items=>items.map(([id,ico,name])=>`<button class="navbtn ${(page===id||(id==='relays'&&page==='relayDevice'))?'active':''}" data-nav="${id}" ${!model?'disabled style="opacity:.4"':''}>${icon(ico)}<span>${name}</span>${model&&counts[id]!==undefined?`<b>${counts[id]}</b>`:''}</button>`).join('');document.getElementById('navMain').innerHTML=make(navMain);document.getElementById('navExtra').innerHTML=make(navExtra)+`<button type="button" class="navbtn" id="pprogCheckUpdateMenu" data-pprog-check-update><span style="width:20px;text-align:center;font-size:20px;line-height:1">↻</span><span>Проверить обновления</span></button>`;document.getElementById('crumb').innerHTML=`${icon('database')}<strong>${esc(labels[page]||'PProg Viewer')}</strong>${model?`<span style="color:#59758e">/</span><span>Пульт ${esc(model.version||'—')}</span>`:''}`;document.getElementById('fileNamePill').classList.toggle('hide',!model);document.getElementById('fileNamePill').textContent=currentFile;document.getElementById('searchWrap').classList.toggle('hide',!model)}
-function head(title,subtitle,actions=''){return `<div class="page-head"><div><div class="eyebrow">PPROG / КОНФИГУРАЦИЯ</div><h2 class="page-title">${title}</h2><p class="page-sub">${subtitle}</p></div>${actions?`<div class="right">${actions}</div>`:''}</div>`}
-function button(label,act,kind='ghost',ico=''){return `<button class="btn ${kind}" data-action="${act}">${ico?icon(ico):''}${label}</button>`}
-function pill(text,kind='neutral'){return `<span class="pill ${kind}">${esc(text)}</span>`}
-function nfmt(s){return Number(s||0).toLocaleString('ru-RU')}
-function empty(message,ico='info'){return `<div class="emptyline">${icon(ico)}<div>${message}</div></div>`}
-function welcome(){return `<div class="empty-app"><div class="welcome"><div class="welcome-icon">${icon('cpu')}</div><div class="eyebrow">PProg Viewer 1.0</div><h2>Конфигурация «Болид»<br><span style="color:#78b0ff">под полным контролем</span></h2><p>Откройте текстовый экспорт PProg и исследуйте приборы, разделы, шлейфы, реле и все сохранённые параметры в одном интерфейсе.</p><button class="install-cta" id="installCta" type="button" onclick="window.pprogShowInstall()" aria-label="Установить PProg Viewer на экран телефона"><span class="install-cta-icon">${icon('download')}</span><span class="install-cta-text"><strong>Установить на телефон</strong><small>Без App Store · отдельное приложение на рабочем столе</small></span><span class="install-cta-chevron">›</span></button><div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Выбрать TXT-файл">${icon('upload')}<strong>Перетащите сюда файл конфигурации</strong><span>или нажмите, чтобы выбрать .TXT · до 25 МБ</span></div><div class="feature-grid"><div class="feature">${icon('layers')}<div><b>Навигация по связям</b><p>Шлейфы, разделы, приборы</p></div></div><div class="feature">${icon('search')}<div><b>Быстрый поиск</b><p>По названию, адресу, номеру</p></div></div><div class="feature">${icon('shield')}<div><b>Приватность</b><p>Без сервера и отправки данных</p></div></div></div></div></div>`}
-function overview(){const linked=model.loops.filter(x=>x.partitions.length).length;const used=model.relays.filter(r=>r.program).length;const stats=[['Приборов',model.devices.length,'Устройства на интерфейсе','cpu'],['Шлейфов / зон',model.loops.length,`${linked} привязано к разделам`,'list'],['Разделов',model.partitions.length,'Логические группы зон','layers'],['Реле',model.relays.length,`${model.outputs.length} выходов — отдельные записи`,'zap']];return head('Обзор системы','Общая информация о загруженной конфигурации',button('Экспорт JSON','json','ghost','download'))+`<div class="config-hero"><div class="config-hero-label">${icon('file-text')} ЗАГРУЖЕННАЯ КОНФИГУРАЦИЯ</div><div class="config-hero-name">${esc(currentFile||'Без названия')}</div><div class="config-hero-version"><span>${icon('cpu')} Пульт С2000</span><strong>Версия ${esc(model.version||'не указана')}</strong></div></div><div class="kpi-grid">${stats.map(([label,v,foot,ico])=>`<div class="panel kpi"><div class="kpi-top">${label}${icon(ico)}</div><div class="kpi-value">${nfmt(v)}</div><div class="kpi-foot">${foot}</div></div>`).join('')}</div>`}
-function devicesPage(){if(!model.devices.length)return head('Приборы','Приборы, зарегистрированные в пульте')+`<div class="panel">${empty('В этом файле нет записей приборов')}</div>`;const d=model.devices[Math.max(0,Math.min(deviceIndex,model.devices.length-1))];const tabs=[['loops',`Шлейфы (${d.loops.length})`],['relays',`Реле (${d.relays.length})`],['outputs',`Выходы (${d.outputs.length})`],...(d.executors.length?[['executors',`Исп. устройства (${d.executors.length})`]]:[])];let inner='';if(deviceTab==='loops')inner=loopTable(d.loops.map(l=>({...l,device:d})),true);if(deviceTab==='relays')inner=relayTable(d.relays.map(r=>({...r,device:d})),true);if(deviceTab==='outputs')inner=outputCards(d.outputs);if(deviceTab==='executors')inner=executorCards(d.executors,d);if(false&&deviceTab==='details')inner=`<div class="info-grid">${fieldGrid(d.node.fields)}</div><h4 style="font-size:12px;margin:23px 0 9px">Остальные записи прибора</h4>${d.node.children.map(n=>nodeCard(n,1)).join('')||empty('Нет вложенных записей')}`;if(!deviceOpened)return head('Приборы',`Устройства в конфигурации · ${model.devices.length}`)+`<div class="panel pad device-directory">${model.devices.map((x,i)=>`<button class="list-row device-directory-row" data-device="${i}"><span class="icon-tile">${icon('cpu')}</span><span class="directory-info"><strong>Адрес ${esc(x.address)} · ${esc(x.typeName)}</strong>${x.description?`<span class="device-desc">${esc(x.description)}</span>`:''}<small>${x.loops.length} шлейфов · ${x.relays.length} реле · ${x.outputs.length} выходов${x.executors.length?' · '+x.executors.length+' ИУ':''}</small></span><span class="directory-chevron">›</span></button>`).join('')}</div>`;return head('Прибор №'+esc(d.address),esc(d.typeName),button('← Все приборы','back-devices','ghost'))+`<div class="panel device-detail"><div class="detail-top"><div><div class="eyebrow">Адрес ${esc(d.address)} · Тип ${esc(d.typeId)}</div><h3>${esc(d.typeName)}</h3>${d.description?`<div class="device-desc">${esc(d.description)}</div>`:`<div class="dim" style="margin:5px 0 10px">Описание прибора в TXT не указано</div>`}<div class="taglist">${pill('ШС: '+d.loops.length,'blue')}${pill('Реле: '+d.relays.length)}${pill('Выходы: '+d.outputs.length)}${d.executors.length?pill('ИУ: '+d.executors.length,'blue'):''}${d.version?pill('Версия: '+d.version,'green'):''}</div></div>${button('Весь TXT','raw-device','sm','code')}</div><div class="tabs">${tabs.map(([id,txt])=>`<button class="tab ${deviceTab===id?'active':''}" data-tab="${id}">${txt}</button>`).join('')}</div>${inner}`}
-function loopTable(items,compact=false){return items.length?`<div class="table-wrap"><table class="data-table zone-table"><thead><tr>${!compact?'<th>Прибор</th>':''}<th>Шлейф</th><th>Описание</th><th>Раздел</th></tr></thead><tbody>${items.map(l=>`<tr class="${l.type==='0'&&!l.partitions.length?'inactive':''}">${!compact?`<td><button class="td-button" data-device="${model.devices.indexOf(l.device)}">${esc(l.device.typeName)} · ${esc(l.device.address)}</button></td>`:''}<td class="mono">${esc(l.id)}</td><td>${esc(l.name||'—')}</td><td>${l.partitions.length?l.partitions.map(id=>{const p=model.partitions.find(x=>x.id===id);return p?`<button class="td-button" data-partition="${model.partitions.indexOf(p)}">${esc(id)} · ${esc(p.name)}</button>`:pill('Раздел '+id+' не найден','amber')}).join(', '):'<span class="dim">Не указан</span>'}</td></tr>`).join('')}</tbody></table></div>`:empty('Шлейфы отсутствуют','list')}
-// Функциональные типы ниже относятся к записи «Выход». Запись «Реле» независима.
-// Расшифровки кодов проверялись на тестовом экспорте 123333.TXT.
-const PPROG_OUTPUT_TYPES=Object.freeze({
-  '4':'Неисправность ОБЩИЙ',
-  '5':'Пожар ОБЩИЙ',
-  '6':'Пуск ОБЩИЙ',
-  '7':'Пожар2 ОБЩИЙ',
-  '10':'Технологическое оборудование',
-  '11':'Противопожарное оборудование',
-  '12':'Пожаротушение'
-});
-// The PProg inspector shows user-friendly names, while TXT stores numeric codes.
-// Confirmed on the supplied 123333.TXT export and the PProg relay inspector screenshot.
-// Unknown codes must stay explicitly unverified, rather than being guessed.
-function pprogTypeLabel(value){
-  const code=String(value??'').trim();
-  if(!code||code==='0')return 'Реле (по умолчанию)';
-  if(Object.prototype.hasOwnProperty.call(PPROG_OUTPUT_TYPES,code))return PPROG_OUTPUT_TYPES[code];
-  if(/^\d+$/.test(code))return 'Неизвестный тип (код '+code+')';
-  return code; // Human-readable names already exported as text are preserved.
-}
-function outputTypeLabel(output){
-  if(!output)return 'Нет данных в TXT';
-  return pprogTypeLabel(output.type||lookup(output.node,'Тип_выхода'));
-}
-
-/* Each explicit executive-unit record is displayed even if its internal
- * address layout is unknown. Complete SP4-style links are derived separately.
- * Role labels are from the five-address structure, not hardcoded physical IDs.
- */
-function executorCards(items, device){
- if(!items.length)return empty('Исполнительные устройства не заданы в TXT','cpu');
- const deviceIndex=model.devices.indexOf(device);
- const entry=(label,record,kind,detail)=>{
-   if(!record)return '';
-   return `<button type="button" class="pprog-executor-part" data-device="${deviceIndex}" data-open-tab="${kind}"><span class="pprog-executor-part-label">${esc(label)}</span><strong>${esc(record.id)}${record.name?' · '+esc(record.name):''}</strong>${detail?`<span class="pprog-executor-part-detail">${esc(detail)}</span>`:''}</button>`;
- };
- return `<div class="pprog-executors">${items.map(unit=>{
-    const complete=unit.structure==='sp4-five-address'&&!!unit.links;
-    const parts=unit.links;
-    const relay=parts?.relay;
-    const relayType=relay?pprogTypeLabel(lookup(relay.node,'Тип_реле')||lookup(relay.node,'Тип_выхода')):'';
-    const program=relay?.program?`Программа ${relay.program}`:'Программа не указана';
-    const controlled=relay?.partitions?.length||0;
-    const relayDescription=relay?`${program} · Тип: ${relayType} · ${controlled} разд.`:'';
-    const body=complete?`<div class="pprog-executor-parts">
-      ${entry('Управление · запись «Реле»',parts.relay,'relays',relayDescription)}
-      ${entry('Рабочий выход',parts.workingOutput,'outputs','Тип: '+outputTypeLabel(parts.workingOutput))}
-      ${entry('Исходный выход',parts.initialOutput,'outputs','Тип: '+outputTypeLabel(parts.initialOutput))}
-      ${entry('Рабочий концевик',parts.workingLimit,'loops',parts.workingLimit.partitions.length?'Разделы: '+parts.workingLimit.partitions.join(', '):'Раздел не указан')}
-      ${entry('Исходный концевик',parts.initialLimit,'loops',parts.initialLimit.partitions.length?'Разделы: '+parts.initialLimit.partitions.join(', '):'Раздел не указан')}
-     </div>`:`<div class="pprog-executor-incomplete">В TXT есть исполнительное устройство, но полный пятиадресный состав СП4 не подтверждён. Неизвестные связи не достраиваются автоматически.</div>`;
-    return `<details class="pprog-executor-card"><summary><span class="pprog-executor-head"><strong>Исполнительное устройство ${esc(unit.id)}${unit.name?' · '+esc(unit.name):''}</strong><small>${complete?'5 связанных записей · по структуре TXT':'Состав не определён · исходная запись сохранена'}</small></span><span class="pprog-executor-chevron">⌄</span></summary><div class="pprog-executor-body"><div class="pprog-executor-note">${complete?'Полная пятиадресная структура СП4 по данным TXT. Это распознавание схемы, а не подтверждение физической модели.':'Исполнительное устройство показано отдельно от реле и выходов.'}</div>${body}</div></details>`;
- }).join('')}</div>`;
-}
-
-function outputCards(items){
- return items.length?`<div class="pprog-output-cards">${items.map(o=>`<div class="pprog-output-card"><div class="pprog-output-header"><strong>Выход ${esc(o.id)}</strong><span>Тип: ${esc(outputTypeLabel(o))}</span></div><div class="pprog-output-description">${esc(o.name||'Без описания')}</div>${renderInlineExtras(o.node,['Выход','Описание','Тип_выхода'])}</div>`).join('')}</div>`:empty('В TXT нет записей «Выход»','zap')
-}
-function relayTable(items,compact=false){
- return items.length?`<div class="relay-cards">${items.map(r=>{
-   const programLabel=lookup(r.node,'Название программы')||lookup(r.node,'Описание программы')||'';
-   const rawRelayType=lookup(r.node,'Тип_реле');
-   const rawOutputTypeOnRelay=lookup(r.node,'Тип_выхода');
-   const directType=rawRelayType||rawOutputTypeOnRelay;
-   // Relay's own fields take priority; a same-number output is only a clue.
-   const sameNumberOutput=r.device?.outputs?.find(o=>String(o.id)===String(r.id));
-   const typeLabel=directType?pprogTypeLabel(directType):sameNumberOutput?outputTypeLabel(sameNumberOutput):pprogTypeLabel('');
-   const typeSource=directType
-     ?'<small>Из записи «Реле» в TXT</small>'
-     :sameNumberOutput
-       ?`<small>Из записи «Выход ${esc(sameNumberOutput.id)}» · совпадение номера, связь не подтверждена</small>`
-       :'<small>Тип не задан в TXT · используется значение PProg по умолчанию</small>';
-   const typeRows=`<span class="pprog-relay-type-hint"><b>Тип:</b> ${esc(typeLabel)}${typeSource}</span>`;
-   return `<details class="relay-card"><summary><span class="relay-summary"><strong class="relay-title">Реле ${esc(r.id)}${r.name?` · ${esc(r.name)}`:''}</strong><span class="relay-params">${typeRows}<span><b>Программа:</b> ${esc(r.program||'—')}${programLabel?' ('+esc(programLabel)+')':''}</span><span><b>Задержка:</b> ${esc(r.delay||'—')} с</span><span><b>Время упр.:</b> ${esc(r.duration||'—')} с</span></span></span><span class="relay-count">${r.partitions.length} разд.</span><span class="relay-chevron">⌄</span></summary><div class="relay-body"><div class="relay-body-heading">Привязанные разделы (${r.partitions.length})</div>${r.partitions.length?`<div class="relay-partitions">${([...r.partitions].sort((a,b)=>Number(a)-Number(b))).map(id=>{const p=model.partitions.find(x=>x.id===id);return `<button class="relay-partition" data-partition="${p?model.partitions.indexOf(p):''}" ${p?'':'disabled'}><span class="relay-partition-name"><strong>Раздел ${esc(id)}</strong><span>${esc(p?.name||'Название не найдено в TXT')}</span></span><span class="relay-partition-arrow">›</span></button>`}).join('')}</div>`:'<div class="dim" style="padding:12px 0">Привязанные разделы в TXT не указаны</div>'}</div></details>`}).join('')}</div>`:empty('В TXT нет записей «Реле»','zap')
-}
-function loopsPage(){let arr=model.loops;if(viewFilter==='linked')arr=arr.filter(l=>l.partitions.length);if(viewFilter==='unlinked')arr=arr.filter(l=>!l.partitions.length);if(viewFilter==='nonzero')arr=arr.filter(l=>l.type!==''&&l.type!=='0');if(listSearch)arr=arr.filter(l=>norm([l.id,l.name,l.type,l.device.address,l.device.typeName,...l.partitions].join(' ')).includes(norm(listSearch)));return head('Шлейфы и зоны',`Всего ${model.loops.length} записей, из них ${model.loops.filter(l=>l.partitions.length).length} с привязкой к разделам`,button('Экспорт CSV','csv-loops','ghost','download'))+`<div class="panel pad"><div class="bar"><div style="display:flex;gap:8px;flex-wrap:wrap"><select class="filter" id="viewFilter" aria-label="Фильтр шлейфов"><option value="all" ${viewFilter==='all'?'selected':''}>Все шлейфы</option><option value="linked" ${viewFilter==='linked'?'selected':''}>В разделах</option><option value="unlinked" ${viewFilter==='unlinked'?'selected':''}>Без раздела</option><option value="nonzero" ${viewFilter==='nonzero'?'selected':''}>Тип ШС ≠ 0</option></select></div><input class="filter mini-search" id="listSearch" value="${esc(listSearch)}" placeholder="Поиск по шлейфам, адресу или описанию..."></div><div class="small muted" style="margin-bottom:8px">Найдено: ${arr.length}. Числовые типы ШС показаны без интерпретации; описания взяты из файла.</div>${loopTable(arr)}</div>`}
-function partitionsSwitch(){const groupCount=model.partitionGroups.length;return `<div class="partition-mode-switch" role="group" aria-label="Выбор вида разделов"><button type="button" data-partitions-view="partitions" class="${partitionsView==='partitions'?'active':''}" aria-pressed="${partitionsView==='partitions'}">Разделы <span>${model.partitions.length}</span></button><button type="button" data-partitions-view="groups" class="${partitionsView==='groups'?'active':''}" aria-pressed="${partitionsView==='groups'}">Группы разделов <span>${groupCount}</span></button></div>`}
-function partitionGroupsPage(){const groups=model.partitionGroups;return `<div class="cols-3">${groups.map(g=>`<div class="panel section-card"><div class="section-id">ГРУППА ${g.id?esc(g.id):'РАЗДЕЛОВ'}</div><div class="section-name">${esc(g.name)}</div><div class="section-meta">${g.partitions.length} разделов</div><div class="taglist" style="margin:0">${g.partitions.map(id=>{const ix=model.partitions.findIndex(p=>p.id===id);const title=model.partitions[ix]?.name||'';return ix>=0?`<button type="button" class="partition-group-part" data-partition="${ix}" title="${esc(title)}">Р ${esc(id)} · ${esc(title)}</button>`:`<span class="pill">Р ${esc(id)}</span>`}).join('')||'<span class="small muted">Привязанные разделы не указаны</span>'}</div></div>`).join('')||`<div class="panel pad">${empty('В этом TXT группы разделов не заданы','layers')}</div>`}</div>`}
-function partitionsPage(){const isGroup=partitionsView==='groups';return head(isGroup?'Группы разделов':'Разделы системы',isGroup?'Группы из секции «Группы разделов» в TXT':'Логические группы зон · нажмите на раздел, чтобы увидеть состав')+partitionsSwitch()+(isGroup?partitionGroupsPage():`<div class="cols-3">${model.partitions.map((p,i)=>`<div class="panel section-card"><div class="section-id">РАЗДЕЛ ${esc(p.id)}</div><div class="section-name">${esc(p.name)}</div><div class="section-meta"><strong>${p.loops.length}</strong> шлейфов · <strong>${p.relays.length}</strong> привязанных реле</div><div class="taglist" style="margin:0">${p.loops.slice(0,6).map(l=>pill('ШС '+l.id,'blue')).join('')}${p.loops.length>6?pill('+'+(p.loops.length-6)):''}</div><button class="btn sm ghost" data-partition="${i}">Открыть состав ${icon('arrow')}</button></div>`).join('')||`<div class="panel">${empty('Разделов нет')}</div>`}</div>`)}
-function partitionLoops(items){return items.length?`<div class="partition-loop-list">${items.map(l=>`<button class="partition-loop-card partition-loop-click" data-device="${model.devices.indexOf(l.device)}"><span class="partition-loop-head"><strong>Прибор ${esc(l.device.address)} · Шлейф ${esc(l.id)}</strong></span>${l.name?`<span class="partition-loop-description">${esc(l.name)}</span>`:''}</button>`).join('')}</div>`:empty('В разделе нет шлейфов','list')}
-function partitionDetail(){const p=model.partitions[partitionIndex];if(!p)return partitionsPage();return head(`Раздел ${esc(p.id)}`,`<span class="partition-detail-title">${esc(p.name)}</span>`,button('Ко всем разделам','go-partitions','ghost','arrow'))+`<div class="panel pad"><div class="panel-header"><div><h3 class="panel-title">Шлейфы раздела (${p.loops.length})</h3></div></div>${partitionLoops(p.loops)}</div>`}
-function relaysPage(){const ds=model.devices.filter(d=>d.relays.length||d.outputs.length||d.executors.length);return head('Реле, выходы и исполнительные устройства',`Выберите прибор · ${ds.length} приборов с управляющими или исполнительными объектами`,button('Экспорт CSV реле','csv-relays','ghost','download'))+`<div class="panel pad"><div class="relay-device-list">${ds.map(d=>`<button class="relay-device-choice" data-relay-device="${model.devices.indexOf(d)}"><span class="relay-device-icon">${icon('cpu')}</span><span class="relay-device-info"><strong>Адрес ${esc(d.address)} · ${esc(d.typeName)}</strong>${d.description?`<span>${esc(d.description)}</span>`:''}<small>${d.relays.length} реле · ${d.outputs.length} выходов${d.executors.length?' · '+d.executors.length+' ИУ':''}</small></span><span class="relay-device-arrow">›</span></button>`).join('')||empty('Реле и выходы в TXT не найдены')}</div></div>`}
-function relayDevicePage(){
- const d=model.devices[relayDeviceIndex];if(!d)return relaysPage();
- const outputMode=relayView==='outputs',executorMode=relayView==='executors';
- const title=executorMode?'Исполнительные устройства прибора':outputMode?'Выходы прибора':'Реле прибора';
- const list=executorMode?executorCards(d.executors,d):outputMode?outputCards(d.outputs):relayTable(d.relays.map(r=>({...r,device:d})),true);
- const tabs=[['relays',`Реле (${d.relays.length})`],['outputs',`Выходы (${d.outputs.length})`],...(d.executors.length?[['executors',`Исп. устройства (${d.executors.length})`]]:[])];
- return head(`${esc(d.typeName)} · адрес ${esc(d.address)}`,esc(d.description||'Записи прибора из PProg'),button('← К приборам','back-relay-devices','ghost'))+`<div class="panel pad"><div class="panel-header"><div><h3 class="panel-title">Реле, выходы и исполнительные устройства</h3><p class="panel-sub">Это независимые записи TXT. Объединённые карточки строятся только при наличии полной адресной структуры.</p></div></div><div class="tabs pprog-relay-tabs">${tabs.map(([id,label])=>`<button type="button" class="tab ${relayView===id?'active':''}" data-relay-view="${id}" aria-pressed="${relayView===id}">${label}</button>`).join('')}</div><div class="pprog-relay-list-head"><strong>${title}</strong>${outputMode?button('Экспорт выходов CSV','csv-outputs','sm','download'):''}</div>${list}</div>`
-}
-function linksPage(){const linked=model.loops.filter(l=>l.partitions.length),rLinked=model.relays.filter(r=>r.partitions.length);return head('Связи системы','Подтверждённые соответствия «прибор → шлейф → раздел» и «раздел → реле»')+`<div class="notice">${icon('link')}<span>Схема строится по явным связям в тексте PProg. Ничего не связывается автоматически по совпадению названий или номеров.</span></div><div class="link-columns"><div class="panel pad"><div class="panel-header"><h3 class="panel-title">Шлейфы → Разделы</h3>${pill(linked.length+' связаны','green')}</div>${model.partitions.length?model.partitions.map((p,i)=>`<div class="chunk" style="border-bottom:1px solid #26364b;padding:11px 0"><div class="chunk-header"><div><button class="td-button" data-partition="${i}">№${esc(p.id)} · ${esc(p.name)}</button><div class="meta">${p.loops.length} шлейфов</div></div>${icon('layers')}</div><div class="taglist" style="margin:0">${p.loops.length?p.loops.map(l=>`<button class="tag click" data-device="${model.devices.indexOf(l.device)}">${esc(l.device.address)}:${esc(l.id)} <span class="dim">${esc(l.name||'')}</span></button>`).join(''):'<span class="dim small">Нет включённых шлейфов</span>'}</div></div>`).join(''):empty('Разделы не найдены')}</div><div class="panel pad"><div class="panel-header"><h3 class="panel-title">Разделы → Реле</h3>${pill(rLinked.length+' связаны',rLinked.length?'green':'neutral')}</div>${rLinked.length?rLinked.map(r=>relayTable([r],true)).join(''):empty('Явных привязок реле к разделам в TXT не найдено','link')}<div class="notice" style="margin-top:16px">${icon('info')}<span>Для проверки локального управления выходами могут потребоваться настройки самих приборов из UProg: текстовый экспорт PProg не содержит всех их внутренних параметров.</span></div></div></div>`}
-function levelsPage(){return head('Уровни доступа','Нажмите на уровень для просмотра разрешённых разделов')+`<div class="access-level-list">${model.levels.map(l=>`<details class="panel pad access-level-card"><summary><span><span class="eyebrow">УРОВЕНЬ ${esc(l.id)}</span><strong>${esc(l.name)}</strong></span><span class="level-right"><span class="level-count">${l.rights.length} разделов</span><span class="level-arrow">⌄</span></span></summary><div class="level-content">${l.rights.map(r=>`<div class="list-row"><span><b>${esc(model.partitions.find(p=>p.id===r.id)?.name||'Раздел №'+r.id)}</b><div class="row-sub">Раздел №${esc(r.id)}</div></span><span class="small" style="color:#91d8b8;text-align:right">${esc(r.rights||'Не указано')}</span></div>`).join('')||empty('Полномочия не указаны')}</div></details>`).join('')||empty('Уровни доступа отсутствуют')}</div>`}
-function passwordsPage(){return head('Пароли и пользователи','Коды и назначенные уровни доступа')+`<div class="panel pad"><div class="table-wrap"><table class="data-table"><thead><tr><th>№</th><th>Тип</th><th>Назначение</th><th>Уровень</th><th>Код</th></tr></thead><tbody>${model.passwords.map(p=>`<tr><td>${esc(p.id)}</td><td>${esc(p.type||'—')}</td><td>${esc(p.name||'—')}</td><td>${esc(p.level||'—')}</td><td class="mono">${esc(p.secret||'—')}</td></tr>`).join('')}</tbody></table></div></div>`}
-function eventsPage(){const s=model.section('Передача событий');return head('Передача событий','Настройки трансляции, получатели и категории событий из TXT')+`<div class="panel pad">${s?.nodes.length?s.nodes.map(n=>`<div class="chunk" style="border-bottom:1px solid #283c51;margin-bottom:0"><div class="chunk-header"><div class="chunk-headtitle">${esc(n.prefix||n.fields[0]?.key||'Настройка')}</div><span class="small dim">Строка ${n.line}</span></div><div class="taglist">${n.fields.flatMap(f=>norm(f.key)==='события'?f.value.split(',').map(e=>pill(e.trim(),'blue')):[`<span class="node-field"><i>${esc(f.key)}</i>${esc(f.value)}</span>`]).join('')}</div>${n.children.map(c=>nodeCard(c,0)).join('')}</div>`).join(''):empty('Настройки передачи событий не указаны','radio')}</div>`}
-function fieldGrid(fields){return fields.length?fields.map(f=>`<div class="field"><dt>${esc(f.key.replace(/_/g,' '))}</dt><dd>${esc(isSecret(f.key)?'••••••':f.value||'—')}</dd></div>`).join(''):'<div class="muted small">Нет параметров</div>'}
-function renderInlineExtras(node,exclude=[]){const fields=node.fields.filter(f=>!exclude.includes(f.key));return fields.map(f=>`<span class="small muted">${esc(f.key)}: ${esc(isSecret(f.key)?'••••••':f.value)}</span>`).join(', ')||'<span class="dim">—</span>'}
-function nodeCard(n,level=0){let title=n.prefix||n.fields[0]?.key||n.raw.trim(),signature=n.fields.slice(0,2).map(f=>!isSecret(f.key)?f.value:'••••••').filter(Boolean).join(' · ');return `<div class="node"><div class="node-head"><div><div class="node-title">${esc(title)} <span class="muted" style="font-weight:500">${esc(signature&&title!==signature?'· '+signature:'')}</span></div></div><div class="node-meta">стр. ${n.line}</div></div>${n.fields.length?`<div class="node-fields">${n.fields.map(f=>`<span class="node-field"><i>${esc(f.key)}</i>${esc(isSecret(f.key)?'••••••':f.value||'—')}</span>`).join('')}</div>`:''}${n.children.length?`<div class="node-child">${n.children.map(c=>nodeCard(c,level+1)).join('')}</div>`:''}</div>`}
-
-function bindingsPage(){const s=model.section('Привязка управления'),roots=s?.nodes||[],pult=roots.find(n=>has(n,'Пульт')||norm(n.prefix)==='пульт'),pultIds=pult?.children.filter(n=>has(n,'Раздел')).map(n=>lookup(n,'Раздел'))||[],addresses=roots.filter(n=>has(n,'Адрес'));return head('Привязка управления','Устройства управления и разрешённые разделы — строго по записям TXT')+`<div class="notice">${icon('info')}<span>Раздел «Привязка управления» описывает полномочия устройств на управление. Он отличается от привязки релейных выходов к разделам.</span></div><div class="cols-2"><div class="panel pad"><div class="panel-header"><div><h3 class="panel-title">Пульт</h3><p class="panel-sub">Разделы, доступные в записи пульта</p></div>${pill(pultIds.length+' разделов','blue')}</div>${pultIds.length?pultIds.map(id=>{const p=model.partitions.find(p=>p.id===id);return `<div class="list-row"><span><div class="row-title">${esc(p?.name||'Раздел №'+id)}</div><div class="row-sub">№${esc(id)}</div></span>${p?`<button class="btn sm ghost" data-partition="${model.partitions.indexOf(p)}">Открыть ${icon('arrow')}</button>`:pill('Не найден','amber')}</div>`}).join(''):empty('В записи пульта разделы не указаны')}</div><div class="panel pad"><div class="panel-header"><div><h3 class="panel-title">Адреса в привязке</h3><p class="panel-sub">Список записей адресов из экспорта</p></div>${pill(addresses.length+' адресов')}</div>${addresses.length?addresses.map(n=>{const id=lookup(n,'Адрес'),d=model.devices.find(x=>x.address===id);return `<div class="list-row"><span><div class="row-title">Адрес ${esc(id)}</div><div class="row-sub">${esc(d?.typeName||'Нет совпадающего прибора в разделе «Приборы»')}</div></span>${d?`<button class="btn sm ghost" data-device="${model.devices.indexOf(d)}">Прибор ${icon('arrow')}</button>`:''}</div>`}).join(''):empty('Адресов нет')}${roots.filter(n=>n!==pult&&!has(n,'Адрес')).map(n=>nodeCard(n)).join('')}</div></div><div class="panel pad" style="margin-top:16px"><div class="panel-header"><h3 class="panel-title">Полная структура привязок</h3>${button('Исходная секция','raw-bindings','sm','code')}</div>${roots.map(n=>nodeCard(n)).join('')||empty('Привязки в файле не заданы')}</div>`}
-function advancedPage(){const known=['Заголовок','Версия пульта C2000','Типы_приборов','Пульт','Приборы','Разделы','Уровни','Пароли','Передача событий','Привязка управления'],extras=model.sections.map((section,i)=>({...section,index:i})).filter(s=>!known.includes(s.name));const extrasFallback=model.sections.map((section,i)=>({...section,index:i})).filter(s=>!['Заголовок','Приборы','Разделы','Уровни','Пароли','Передача событий','Привязка управления'].includes(s.name));const avail=extrasFallback;let ix=advancedIndex;if(ix<0||!avail.some(s=>s.index===ix))ix=avail[0]?.index??0;const s=model.sections[ix];let special='';if(s.name==='Типы_приборов')special=`<div class="table-wrap"><table class="data-table"><thead><tr><th>ID типа</th><th>Название</th><th>Число шлейфов</th><th>Число реле</th><th>Базовый тип</th></tr></thead><tbody>${s.nodes.map(n=>`<tr><td class="mono">${esc(lookup(n,'Тип_прибора'))}</td><td>${esc(lookup(n,'Название'))}</td><td>${esc(lookup(n,'Число_шлейфов'))}</td><td>${esc(lookup(n,'Число_реле'))}</td><td>${esc(lookup(n,'Базовый_тип'))}</td></tr>`).join('')}</tbody></table></div>`;return head('Другие вкладки PProg','Группы разделов, временные зоны, сценарии, каталог приборов и системные параметры')+`<div class="section-picker">${avail.map(x=>`<button class="${x.index===ix?'active':''}" data-advanced="${x.index}">${esc(x.name.replace(/_/g,' '))}</button>`).join('')}</div><div class="panel pad"><div class="panel-header"><div><h3 class="panel-title">${esc(s.name.replace(/_/g,' '))}</h3><p class="panel-sub">${s.nodes.length} корневых записей · строка ${s.line}</p></div>${button('Полный TXT','raw-advanced','sm','code')}</div>${special||s.nodes.map(n=>nodeCard(n)).join('')||empty('Секция существует в файле, но записей в ней нет','file')}</div>`}
-function rawPage(){const s=model.sections[rawIndex]||model.sections[0];if(!s)return head('Все данные TXT','');return head('Все данные TXT',`Исходные секции и параметры · ${model.sections.length} секций`,button('Экспорт JSON','json','ghost','download'))+`<div class="notice">${icon('shield')}<span>Текст показан со скрытыми значениями паролей. Для просмотра самих кодов перейдите на вкладку «Пароли». Все строки доступны ниже, включая секции без записей.</span></div><div class="section-picker">${model.sections.map((s,i)=>`<button class="${rawIndex===i?'active':''}" data-raw="${i}">${esc(s.name.replace(/_/g,' '))}</button>`).join('')}</div><div class="panel pad"><div class="panel-header"><div><h3 class="panel-title">[${esc(s.name)}]</h3><p class="panel-sub">Строка ${s.line} · ${s.nodes.length} корневых записей · ${s.rawLines.length} строк содержимого</p></div>${pill('Только чтение','blue')}</div><div class="bar"><div class="small muted">Структурированное дерево данных</div><button class="btn sm ghost" data-action="toggle-source">${icon('code')} <span id="sourceToggleLabel">Показать исходный текст</span></button></div><div id="nodeTree">${s.nodes.map(n=>nodeCard(n)).join('')||empty('Секция присутствует, но записей не содержит','file')}</div><pre class="source-pre hide" id="sourceBlock">${esc('['+s.name+']\n'+s.rawLines.map(x=>obscureRaw(x.raw)).join('\n'))}</pre></div>`}
-function searchPage(){
- const q=norm(searchTerm).trim().replace(/\s+/g,' ');
- const exactQuery=q.match(/^(исполнительн[а-яё]*\s+устройств[а-яё]*|иу|клапан|раздел[а-яё]*|адрес|прибор[а-яё]*|устройств[а-яё]*|шлейф[а-яё]*|шс|реле|групп[а-яё]*(?:\s+разделов)?)\s*(?:(?:№|#|номер)\s*)?(\d+)$/);
- const prefix=exactQuery?.[1]||'';
- const targetId=exactQuery?.[2]||'';
- const targetKind=prefix.startsWith('исполнительн')||prefix==='иу'||prefix==='клапан'?'Исполнительное устройство':prefix.startsWith('раздел')?'Раздел':prefix==='адрес'||prefix.startsWith('прибор')||prefix.startsWith('устройств')?'Прибор':prefix.startsWith('шлейф')||prefix==='шс'?'Шлейф':prefix==='реле'?'Реле':prefix.startsWith('групп')?'Группа разделов':'';
- const words=q.split(/\s+/).filter(Boolean);
- const results=[];
- const add=(label,detail,kind,attr,terms,id)=>{
-  const hay=norm([label,detail,terms].join(' ')).replace(/\s+/g,' ');
-  const matched=exactQuery?kind===targetKind&&String(id)===targetId:words.every(word=>hay.includes(word));
-  if(!matched)return;
-  const priority={'Исполнительное устройство':6,'Раздел':5,'Прибор':4,'Группа разделов':3,'Шлейф':2,'Реле':1};
-  const score=(String(id)===q?1000:0)+(hay.startsWith(q)?100:0)+(priority[kind]||0);
-  results.push({label,detail,kind,attr,score,id});
- };
- for(const [i,p] of model.partitions.entries())add(`Раздел ${p.id} · ${p.name}`,`${p.loops.length} шлейфов`,'Раздел',`data-partition="${i}"`,`${p.id} ${p.name}`,p.id);
- for(const [i,d] of model.devices.entries())add(`${d.typeName} · адрес ${d.address}`,`${d.description||'Без описания'} · ${d.loops.length} ШС · ${d.relays.length} реле`,'Прибор',`data-device="${i}"`,`прибор адрес ${d.address} ${d.typeName} ${d.typeId} ${d.description} ${d.version}`,d.address);
- for(const g of model.partitionGroups)add(`Группа разделов ${g.id||''} · ${g.name}`,`${g.partitions.length} разделов`,'Группа разделов','data-open-partition-groups="true"',`${g.id} ${g.name} ${g.partitions.join(' ')}`,g.id);
- for(const l of model.loops)add(`Шлейф ${l.id} · ${l.name||'без описания'}`,`${l.device.typeName} · адрес ${l.device.address}`,'Шлейф',`data-device="${model.devices.indexOf(l.device)}" data-open-tab="loops"`,`${l.id} ${l.name} ${l.type} ${l.device.address} ${l.device.typeName} раздел ${l.partitions.join(' ')}`,l.id);
- for(const unit of model.executors)add(`Исполнительное устройство ${unit.id} · ${unit.name||'без описания'}`,`${unit.device.typeName} · адрес ${unit.device.address} · ${unit.structure==='sp4-five-address'?'полный состав 5 адресов':'состав не определён'}`,'Исполнительное устройство',`data-device="${model.devices.indexOf(unit.device)}" data-open-tab="executors"`,`исполнительное устройство иу клапан ${unit.id} ${unit.name} ${unit.device.address} ${unit.device.typeName}`,unit.id);
- for(const r of model.relays)add(`Реле ${r.id} · ${r.name||'без описания'}`,`${r.device.typeName} · адрес ${r.device.address} · программа ${r.program||'—'}`,'Реле',`data-device="${model.devices.indexOf(r.device)}" data-open-tab="relays"`,`${r.id} ${r.name} ${r.program} ${r.device.address} ${r.device.typeName}`,r.id);
- results.sort((a,b)=>b.score-a.score||Number(a.id)-Number(b.id)||a.label.localeCompare(b.label,'ru'));
- return head('Поиск',`Запрос: «${esc(searchTerm)}» · результатов ${results.length}`)+`<div class="panel pad">${results.slice(0,250).map(r=>`<button class="list-row" ${r.attr}><div><div class="row-title">${esc(r.label)}</div><div class="row-sub">${esc(r.detail)} · ${esc(r.kind)}</div></div>${icon('arrow','right-arrow')}</button>`).join('')||empty('Совпадений не найдено','search')}${results.length>250?'<div class="small muted">Показаны первые 250 совпадений. Уточните запрос.</div>':''}</div>`;
-}
-function render(){renderNavigation();const components={overview,devices:devicesPage,loops:loopsPage,partitions:partitionsPage,partitionDetail,relays:relaysPage,relayDevice:relayDevicePage,links:linksPage,levels:levelsPage,passwords:passwordsPage,events:eventsPage,bindings:bindingsPage,advanced:advancedPage,raw:rawPage,search:searchPage};document.getElementById('content').innerHTML=model?(components[page]||overview)():welcome();const header=document.querySelector('.topbar')||document.querySelector('header');if(header){document.documentElement.style.setProperty('--sticky-zone-top',Math.max(0,Math.round(header.getBoundingClientRect().bottom))+'px');}}
-function toast(text){const host=document.getElementById('toastHost');host.innerHTML=`<div class="toast">${esc(text)}</div>`;clearTimeout(toast.t);toast.t=setTimeout(()=>host.innerHTML='',4400)}
-async function importFile(file){if(!file)return;if(file.size>25*1024*1024){toast('Файл превышает 25 МБ');return}if(/\.gpc$/i.test(file.name)){toast('GPC — зашифрованный формат. Нужен текстовый экспорт PProg (.TXT).');return}try{const {text,encoding}=textRead(await file.arrayBuffer());const parsed=parseConfig(text);const built=buildModel(parsed);model=built;currentFile=safeName(file.name);fileEncoding=encoding;deviceIndex=0;partitionIndex=0;rawIndex=0;advancedIndex=-1;shownPasswords.clear();navig('overview');toast(`Загружено: ${model.devices.length} приборов, ${model.partitions.length} разделов, ${model.loops.length} шлейфов`)}catch(e){toast('Не удалось разобрать файл: '+(e?.message||'неизвестная ошибка'))}}
-function saveBlob(content,name,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),500)}
-function csvCell(v){const s=String(v??'');return '"'+s.replace(/"/g,'""')+'"'}
-function exportCSV(kind){const rows=kind==='loops'?[['Адрес прибора','Прибор','Шлейф','Описание','Тип шлейфа','Разделы'],...model.loops.map(l=>[l.device.address,l.device.typeName,l.id,l.name,l.type,l.partitions.join('; ')])]:kind==='outputs'?[['Адрес прибора','Прибор','Выход','Описание','Код типа выхода','Расшифровка типа'],...model.outputs.map(o=>[o.device.address,o.device.typeName,o.id,o.name,o.type||'',outputTypeLabel(o)])]:[['Адрес прибора','Прибор','Реле','Описание','Программа','Задержка','Время управления','Разделы'],...model.relays.map(r=>[r.device.address,r.device.typeName,r.id,r.name,r.program,r.delay,r.duration,r.partitions.join('; ')])];saveBlob('\ufeff'+rows.map(row=>row.map(csvCell).join(';')).join('\r\n'),`PProg_${kind==='loops'?'shleify':kind==='outputs'?'vyhody':'rele'}.csv`,'text/csv;charset=utf-8')}
-function exportJSON(){const scrub=node=>({line:node.line,prefix:node.prefix,fields:node.fields.map(f=>({key:f.key,value:isSecret(f.key)?'••••••':f.value})),children:node.children.map(scrub)});const payload={generator:'PProg Viewer',filename:currentFile,encoding:fileEncoding,pultVersion:model.version,sections:model.sections.map(s=>({name:s.name,line:s.line,records:s.nodes.map(scrub)}))};saveBlob(JSON.stringify(payload,null,2),`PProg_config_view.json`,'application/json;charset=utf-8');toast('JSON сохранён, значения паролей скрыты')}
-// Single listener for dynamically rendered controls; all values from TXT are escaped before entering HTML.
-document.addEventListener('click',e=>{if(e.target.closest('#menuBtn')){menuOpen=!menuOpen;document.getElementById('sidebar').classList.toggle('open',menuOpen);return}if(e.target.closest('#openBtn')||e.target.closest('#dropzone')){document.getElementById('fileInput').click();return}const choice=e.target.closest('[data-partitions-view]');if(choice){partitionsView=choice.dataset.partitionsView==='groups'?'groups':'partitions';render();return}if(e.target.closest('[data-open-partition-groups]')){navig('partitions');partitionsView='groups';render();return}const nav=e.target.closest('[data-nav]');if(nav){navig(nav.dataset.nav);return}const rd=e.target.closest('[data-relay-device]');if(rd){relayDeviceIndex=Number(rd.dataset.relayDevice);relayView=model.devices[relayDeviceIndex]?.relays.length?'relays':model.devices[relayDeviceIndex]?.outputs.length?'outputs':'executors';navig('relayDevice');return}const relayMode=e.target.closest('[data-relay-view]');if(relayMode){relayView=['outputs','executors'].includes(relayMode.dataset.relayView)?relayMode.dataset.relayView:'relays';render();return}const dv=e.target.closest('[data-device]');if(dv){deviceTab=dv.dataset.openTab||'loops';navig('devices',{device:Number(dv.dataset.device),tab:deviceTab});return}const part=e.target.closest('[data-partition]');if(part){navig('partitionDetail',{partition:Number(part.dataset.partition)});return}const advanced=e.target.closest('[data-advanced]');if(advanced){advancedIndex=Number(advanced.dataset.advanced);render();return}const raw=e.target.closest('[data-raw]');if(raw){rawIndex=Number(raw.dataset.raw);navig('raw',{section:rawIndex});return}const tab=e.target.closest('[data-tab]');if(tab){deviceTab=tab.dataset.tab;render();return}const pass=e.target.closest('[data-password]');if(pass){const id=pass.dataset.password;if(shownPasswords.has(id))shownPasswords.delete(id);else if(confirm('Показать код доступа на экране? Убедитесь, что посторонние его не увидят.'))shownPasswords.add(id);render();return}const action=e.target.closest('[data-action]');if(action){switch(action.dataset.action){case'back-devices':deviceOpened=false;navig('devices');break;case'back-relay-devices':navig('relays');break;case'go-devices':navig('devices');break;case'go-partitions':navig('partitions');break;case'go-raw':navig('raw');break;case'raw-device':navig('raw',{section:model.sections.findIndex(s=>s.name==='Приборы')});break;case'raw-bindings':navig('raw',{section:model.sections.findIndex(s=>s.name==='Привязка управления')});break;case'raw-advanced':navig('raw',{section:advancedIndex>=0?advancedIndex:model.sections.findIndex(s=>s.name==='Группы разделов')});break;case'json':exportJSON();break;case'csv-loops':exportCSV('loops');break;case'csv-relays':exportCSV('relays');break;case'csv-outputs':exportCSV('outputs');break;case'toggle-source':{const src=document.getElementById('sourceBlock'),tree=document.getElementById('nodeTree');src.classList.toggle('hide');tree.classList.toggle('hide');document.getElementById('sourceToggleLabel').textContent=src.classList.contains('hide')?'Показать исходный текст':'Показать дерево';break}}}});
-document.addEventListener('change',e=>{if(e.target.id==='fileInput'){importFile(e.target.files?.[0]);e.target.value=''}if(e.target.id==='viewFilter'){viewFilter=e.target.value;render()}});
-document.addEventListener('input',e=>{if(e.target.id==='globalSearch'){searchTerm=e.target.value.trim();if(searchTerm.length){page='search';render()}else{page='overview';render()}}if(e.target.id==='listSearch'){listSearch=e.target.value;const a=e.target.selectionStart;render();const b=document.getElementById('listSearch');if(b){b.focus();b.setSelectionRange(a,a)}}});
-document.addEventListener('keydown',e=>{if(e.target.id==='dropzone'&&(e.key==='Enter'||e.key===' ')){e.preventDefault();document.getElementById('fileInput').click()}});
-let dragDepth=0;window.addEventListener('dragenter',e=>{if(e.dataTransfer?.types?.includes('Files')){e.preventDefault();dragDepth++;document.getElementById('hoverDrop').classList.add('show')}});window.addEventListener('dragover',e=>{if(e.dataTransfer?.types?.includes('Files')){e.preventDefault();e.dataTransfer.dropEffect='copy'}});window.addEventListener('dragleave',e=>{e.preventDefault();dragDepth--;if(dragDepth<=0){dragDepth=0;document.getElementById('hoverDrop').classList.remove('show')}});window.addEventListener('drop',e=>{e.preventDefault();dragDepth=0;document.getElementById('hoverDrop').classList.remove('show');importFile(e.dataTransfer?.files?.[0])});
-document.getElementById('brandIcon').innerHTML=icon('cpu');document.getElementById('openIcon').innerHTML=icon('upload');document.getElementById('searchIcon').innerHTML=icon('search');document.getElementById('menuBtn').innerHTML=icon('menu');document.getElementById('dropIcon').innerHTML=icon('upload');document.getElementById('offlineText').innerHTML=icon('shield')+'100% локальная обработка';render();
-</script>
-<script>
-(function(){
- const nav=document.getElementById('mobileBottomNav'), backdrop=document.getElementById('mobileBackdrop'), side=document.getElementById('sidebar');
- const items=[['overview','layout','Обзор'],['devices','cpu','Приборы'],['partitions','layers','Разделы'],['relays','zap','Реле'],['menu','menu','Ещё']];
- function refresh(){
-  if(!nav || typeof icon!=='function')return;
-  nav.innerHTML=items.map(([id,ico,label])=>'<button type="button" data-mobile-page="'+id+'" class="'+(typeof page!=='undefined' && (page===id||(id==='relays'&&page==='relayDevice'))?'active':'')+'" aria-label="'+label+'">'+icon(ico)+'<span>'+label+'</span></button>').join('');
-  const open=side.classList.contains('open');backdrop.classList.toggle('open',open);document.body.classList.toggle('menu-is-open',open);
- }
- function close(){side.classList.remove('open');if(typeof menuOpen!=='undefined')menuOpen=false;refresh()}
- nav.addEventListener('click',function(e){const b=e.target.closest('[data-mobile-page]');if(!b)return;const id=b.dataset.mobilePage;if(id==='menu'){side.classList.toggle('open');if(typeof menuOpen!=='undefined')menuOpen=side.classList.contains('open');refresh()}else if(typeof navig==='function'){navig(id);close()}});
- backdrop.addEventListener('click',close);
- document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
- document.addEventListener('click',e=>{if(e.target.closest('#menuBtn')||e.target.closest('.sidebar [data-nav]'))requestAnimationFrame(refresh)});
- const observer=new MutationObserver(()=>refresh());observer.observe(document.getElementById('content'),{childList:true});
- refresh();
-})();
-</script><script>
-/* Keyboard-specific layout for iOS PWA; preserve tabs while not editing. */
-(function(){
- const textField=el=>!!el&&(el.matches?.('input:not([type="file"]):not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"]')||el.isContentEditable);
- let keyboardOpen=false;
- const set=open=>{keyboardOpen=!!open;document.body.classList.toggle('pprog-keyboard-open',keyboardOpen);};
- document.addEventListener('focusin',e=>{if(textField(e.target))set(true)});
- document.addEventListener('focusout',()=>setTimeout(()=>{if(!textField(document.activeElement))set(false)},90));
- const dismissOnNavigation=e=>{
-   if(!textField(document.activeElement))return;
-   if(e.target.closest?.('[data-nav],[data-device],[data-partition],[data-partitions-view],[data-open-partition-groups],[data-mobile-page]')){
-     document.activeElement.blur();
-     set(false);
-   }
- };
- document.addEventListener('pointerdown',dismissOnNavigation,true);
- document.addEventListener('click',dismissOnNavigation,true);
- if(window.visualViewport){
-   let fullHeight=window.visualViewport.height;
-   window.visualViewport.addEventListener('resize',()=>{
-     const viewport=window.visualViewport;
-     if(!textField(document.activeElement)){fullHeight=Math.max(fullHeight,viewport.height);if(keyboardOpen)set(false);return;}
-     if(viewport.height>fullHeight-50&&keyboardOpen){set(false);}
-     if(viewport.height<fullHeight-110&&!keyboardOpen){set(true);}
-   });
- }
-})();
-</script>
-<script>
-if ('serviceWorker' in navigator && location.protocol === 'https:') {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
-}
-</script>
-<script>
-(function(){
-  const dialog=document.getElementById('installHelp');
-  const close=document.getElementById('installClose');
-  let oldFocus=null;
-  window.pprogShowInstall=function(){oldFocus=document.activeElement;dialog.hidden=false;document.body.style.overflow='hidden';close.focus();};
-  function hide(){dialog.hidden=true;document.body.style.overflow='';if(oldFocus && oldFocus.isConnected)oldFocus.focus();};
-  close.addEventListener('click',hide);
-  dialog.addEventListener('click',function(e){if(e.target===dialog)hide();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!dialog.hidden)hide();});
-  document.getElementById('installCopy').addEventListener('click',async function(){
-    try{await navigator.clipboard.writeText(location.href);this.textContent='Ссылка скопирована';}
-    catch{this.textContent='Скопируйте адрес из Safari';}
-  });
-})();
-</script>
-
-<script>
-/* Клиентский механизм обновления. Проверка через version.json минует кеш SW. */
-(function(){
-  'use strict';
-  const LOCAL_BUILD='2026.11.10.13';
-  let checking=false;
-  const banner=document.createElement('div');
-  banner.id='pprogUpdateNotice';
-  banner.hidden=true;
-  banner.setAttribute('role','status');
-  banner.innerHTML='<div class="pprogUpdateText"><strong>Доступно обновление PProg Viewer</strong><span>Новая версия готова к установке.</span></div><button type="button" class="pprogUpdateButton" id="pprogApplyUpdate">Обновить</button>';
-  document.body.appendChild(banner);
-  function notify(message){if(typeof toast==='function')toast(message)}
-  function newVersion(version) {
-    banner.hidden=false;
-    const span=banner.querySelector('.pprogUpdateText span');
-    if(span) span.textContent='Версия '+version+' · нажмите «Обновить».';
-  }
-  let registration=null;
-  async function check(manual){
-    if(checking)return; if(!navigator.onLine){if(manual)notify('Нет подключения к интернету.');return;}
-    checking=true;
-    if(manual)notify('Проверяю наличие обновлений…');
-    try{
-      if('serviceWorker' in navigator){
-        registration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});
-        await registration.update();
-      }
-      const uri=new URL('./version.json',location.href);
-      uri.searchParams.set('t',String(Date.now()));
-      const res=await fetch(uri.toString(),{cache:'no-store'});
-      if(!res.ok)throw new Error('HTTP '+res.status);
-      const latest=await res.json();
-      if(latest.version && latest.version!==LOCAL_BUILD){newVersion(latest.version);}
-      else if(manual){banner.hidden=true;notify('У вас актуальная версия PProg Viewer.');}
-    }catch(e){if(manual)notify('Не удалось проверить обновление. Проверьте интернет.');}
-    finally{checking=false;}
-  }
-  async function apply(){
-    if(typeof model!=='undefined' && model && !confirm('Обновление перезагрузит приложение. Загруженную TXT-конфигурацию потребуется открыть снова. Продолжить?'))return;
-    const button=banner.querySelector('button');
-    button.disabled=true;button.textContent='Обновляю…';
-    try{
-      if('serviceWorker' in navigator){
-        const reg=registration||await navigator.serviceWorker.getRegistration('./');
-        if(reg){
-          await reg.update();
-          if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});
-        }
-      }
-      const url=new URL(location.href);
-      url.searchParams.set('_pprog_update',String(Date.now()));
-      location.replace(url.toString());
-    }catch(e){
-      button.disabled=false;button.textContent='Повторить';
-      notify('Не удалось обновить. Проверьте интернет.');
-    }
-  }
-  document.addEventListener('click',function(e){
-    if(e.target.closest('[data-pprog-check-update]')){e.preventDefault();check(true);}
-  },true);
-  banner.querySelector('#pprogApplyUpdate').addEventListener('click',apply);
-  if('serviceWorker' in navigator){
-    let changed=false;
-    navigator.serviceWorker.addEventListener('controllerchange',function(){
-      if(changed)return;
-      changed=true;
-      check(false).catch(function(){});
-    });
-  }
-  window.pprogCheckUpdates=()=>check(true);
-  window.addEventListener('load',()=>setTimeout(()=>check(false),1200));
-  window.addEventListener('online',()=>check(false));
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)check(false);});
-  setInterval(()=>{if(!document.hidden)check(false);}, 30*60*1000);
-})();
-</script>
 </body>
 </html>
