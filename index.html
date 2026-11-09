@@ -104,6 +104,14 @@
   html, body, body * { touch-action: pan-x pan-y !important; }
   input, select, textarea, [contenteditable="true"] { font-size: 16px !important; }
 }
+
+/* Уведомление появляется только при наличии новой версии. */
+#pprogUpdateNotice{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom));left:14px;right:14px;z-index:200;max-width:520px;margin:auto;background:#1c3553;color:#e9f4ff;border:1px solid #6592c5;border-radius:15px;padding:15px;box-shadow:0 15px 35px #0008;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#pprogUpdateNotice[hidden]{display:none!important}
+#pprogUpdateNotice .pprogUpdateText{flex:1;min-width:160px;font-size:13px;line-height:1.4}
+#pprogUpdateNotice .pprogUpdateText strong{display:block;font-size:14px;margin-bottom:3px}
+#pprogUpdateNotice .pprogUpdateButton{background:#78adff;color:#091528;font-weight:800;border:0;padding:10px 14px;border-radius:9px;min-height:40px;touch-action:manipulation}
+@media (min-width:800px){#pprogUpdateNotice{bottom:20px}}
 </style>
 </head>
 <body>
@@ -145,7 +153,7 @@ return {...parsed,devices,types,partitions,levels,passwords,loops:devices.flatMa
 let model=null,currentFile='',fileEncoding='',page='overview',relayDeviceIndex=0,deviceIndex=0,deviceTab='loops',deviceOpened=false,partitionIndex=0,rawIndex=0,advancedIndex=-1,viewFilter='all',listSearch='',shownPasswords=new Set(),searchTerm='',menuOpen=false;
 const navMain=[['overview','layout','Обзор'],['devices','cpu','Приборы'],['loops','list','Шлейфы и зоны'],['partitions','layers','Разделы'],['relays','zap','Реле и выходы'],['links','link','Связи системы']];const navExtra=[['levels','users','Уровни доступа'],['passwords','lock','Пароли'],['events','radio','Передача событий'],['bindings','link','Привязка управления'],['advanced','grid','Другие вкладки PProg'],['raw','code','Все данные TXT']];
 function navig(to,options={}){page=to;if(options.device!==undefined){deviceIndex=options.device;deviceOpened=true;}else if(to==='devices')deviceOpened=false;if(options.partition!==undefined)partitionIndex=options.partition;if(options.tab)deviceTab=options.tab;if(options.section!==undefined)rawIndex=options.section;listSearch='';viewFilter='all';shownPasswords.clear();searchTerm='';document.getElementById('globalSearch').value='';render();window.scrollTo({top:0,behavior:'instant'});if(menuOpen){menuOpen=false;document.getElementById('sidebar').classList.remove('open')}}
-function renderNavigation(){const labels={overview:model?'Обзор конфигурации':'Начало',devices:'Приборы',loops:'Шлейфы и зоны',partitions:'Разделы',relays:'Реле и выходы',relayDevice:'Реле прибора',links:'Связи системы',levels:'Уровни доступа',passwords:'Пароли',events:'Передача событий',bindings:'Привязка управления',advanced:'Другие вкладки PProg',raw:'Данные TXT',search:'Результаты поиска'};const counts={devices:model?.devices.length,loops:model?.loops.length,partitions:model?.partitions.length,relays:model?.relays.length,levels:model?.levels.length,passwords:model?.passwords.length};const make=items=>items.map(([id,ico,name])=>`<button class="navbtn ${(page===id||(id==='relays'&&page==='relayDevice'))?'active':''}" data-nav="${id}" ${!model?'disabled style="opacity:.4"':''}>${icon(ico)}<span>${name}</span>${model&&counts[id]!==undefined?`<b>${counts[id]}</b>`:''}</button>`).join('');document.getElementById('navMain').innerHTML=make(navMain);document.getElementById('navExtra').innerHTML=make(navExtra);document.getElementById('crumb').innerHTML=`${icon('database')}<strong>${esc(labels[page]||'PProg Viewer')}</strong>${model?`<span style="color:#59758e">/</span><span>Пульт ${esc(model.version||'—')}</span>`:''}`;document.getElementById('fileNamePill').classList.toggle('hide',!model);document.getElementById('fileNamePill').textContent=currentFile;document.getElementById('searchWrap').classList.toggle('hide',!model)}
+function renderNavigation(){const labels={overview:model?'Обзор конфигурации':'Начало',devices:'Приборы',loops:'Шлейфы и зоны',partitions:'Разделы',relays:'Реле и выходы',relayDevice:'Реле прибора',links:'Связи системы',levels:'Уровни доступа',passwords:'Пароли',events:'Передача событий',bindings:'Привязка управления',advanced:'Другие вкладки PProg',raw:'Данные TXT',search:'Результаты поиска'};const counts={devices:model?.devices.length,loops:model?.loops.length,partitions:model?.partitions.length,relays:model?.relays.length,levels:model?.levels.length,passwords:model?.passwords.length};const make=items=>items.map(([id,ico,name])=>`<button class="navbtn ${(page===id||(id==='relays'&&page==='relayDevice'))?'active':''}" data-nav="${id}" ${!model?'disabled style="opacity:.4"':''}>${icon(ico)}<span>${name}</span>${model&&counts[id]!==undefined?`<b>${counts[id]}</b>`:''}</button>`).join('');document.getElementById('navMain').innerHTML=make(navMain);document.getElementById('navExtra').innerHTML=make(navExtra)+`<button type="button" class="navbtn" id="pprogCheckUpdateMenu" data-pprog-check-update><span style="width:20px;text-align:center;font-size:20px;line-height:1">↻</span><span>Проверить обновления</span></button>`;document.getElementById('crumb').innerHTML=`${icon('database')}<strong>${esc(labels[page]||'PProg Viewer')}</strong>${model?`<span style="color:#59758e">/</span><span>Пульт ${esc(model.version||'—')}</span>`:''}`;document.getElementById('fileNamePill').classList.toggle('hide',!model);document.getElementById('fileNamePill').textContent=currentFile;document.getElementById('searchWrap').classList.toggle('hide',!model)}
 function head(title,subtitle,actions=''){return `<div class="page-head"><div><div class="eyebrow">PPROG / КОНФИГУРАЦИЯ</div><h2 class="page-title">${title}</h2><p class="page-sub">${subtitle}</p></div>${actions?`<div class="right">${actions}</div>`:''}</div>`}
 function button(label,act,kind='ghost',ico=''){return `<button class="btn ${kind}" data-action="${act}">${ico?icon(ico):''}${label}</button>`}
 function pill(text,kind='neutral'){return `<span class="pill ${kind}">${esc(text)}</span>`}
@@ -254,6 +262,84 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
     try{await navigator.clipboard.writeText(location.href);this.textContent='Ссылка скопирована';}
     catch{this.textContent='Скопируйте адрес из Safari';}
   });
+})();
+</script>
+
+<script>
+/* Клиентский механизм обновления. Проверка через version.json минует кеш SW. */
+(function(){
+  'use strict';
+  const LOCAL_BUILD='2026.11.10.2';
+  let checking=false;
+  const banner=document.createElement('div');
+  banner.id='pprogUpdateNotice';
+  banner.hidden=true;
+  banner.setAttribute('role','status');
+  banner.innerHTML='<div class="pprogUpdateText"><strong>Доступно обновление PProg Viewer</strong><span>Новая версия готова к установке.</span></div><button type="button" class="pprogUpdateButton" id="pprogApplyUpdate">Обновить</button>';
+  document.body.appendChild(banner);
+  function notify(message){if(typeof toast==='function')toast(message)}
+  function newVersion(version) {
+    banner.hidden=false;
+    const span=banner.querySelector('.pprogUpdateText span');
+    if(span) span.textContent='Версия '+version+' · нажмите «Обновить».';
+  }
+  let registration=null;
+  async function check(manual){
+    if(checking || !navigator.onLine)return;
+    checking=true;
+    if(manual)notify('Проверяю наличие обновлений…');
+    try{
+      if('serviceWorker' in navigator){
+        registration=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});
+        await registration.update();
+      }
+      const uri=new URL('./version.json',location.href);
+      uri.searchParams.set('t',String(Date.now()));
+      const res=await fetch(uri.toString(),{cache:'no-store'});
+      if(!res.ok)throw new Error('HTTP '+res.status);
+      const latest=await res.json();
+      if(latest.version && latest.version!==LOCAL_BUILD){newVersion(latest.version);}
+      else if(manual){banner.hidden=true;notify('У вас актуальная версия PProg Viewer.');}
+    }catch(e){if(manual)notify('Не удалось проверить обновление. Проверьте интернет.');}
+    finally{checking=false;}
+  }
+  async function apply(){
+    if(typeof model!=='undefined' && model && !confirm('Обновление перезагрузит приложение. Загруженную TXT-конфигурацию потребуется открыть снова. Продолжить?'))return;
+    const button=banner.querySelector('button');
+    button.disabled=true;button.textContent='Обновляю…';
+    try{
+      if('serviceWorker' in navigator){
+        const reg=registration||await navigator.serviceWorker.getRegistration('./');
+        if(reg){
+          await reg.update();
+          if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});
+        }
+      }
+      const url=new URL(location.href);
+      url.searchParams.set('_pprog_update',String(Date.now()));
+      location.replace(url.toString());
+    }catch(e){
+      button.disabled=false;button.textContent='Повторить';
+      notify('Не удалось обновить. Проверьте интернет.');
+    }
+  }
+  document.addEventListener('click',function(e){
+    if(e.target.closest('[data-pprog-check-update]')){e.preventDefault();check(true);}
+  },true);
+  banner.querySelector('#pprogApplyUpdate').addEventListener('click',apply);
+  if('serviceWorker' in navigator){
+    let changed=false;
+    navigator.serviceWorker.addEventListener('controllerchange',function(){
+      if(changed)return;
+      changed=true;
+      check(false).catch(function(){});
+    });
+  }
+  window.pprogCheckUpdates=()=>check(true);
+  window.addEventListener('load',()=>setTimeout(()=>check(false),1200));
+  window.addEventListener('online',()=>check(false));
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)check(false);});
+  setInterval(()=>{if(!document.hidden)check(false);}, 30*60*1000);
 })();
 </script>
 </body>
