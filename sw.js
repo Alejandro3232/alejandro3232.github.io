@@ -1,6 +1,6 @@
 /* PProg Viewer: offline navigation with network-first updates. */
-const BUILD='2026.11.10.8';
-const CACHE='pprog-viewer-v14-autoupdate-20261110-8';
+const BUILD='2026.11.10.9';
+const CACHE='pprog-viewer-v14-autoupdate-20261110-9';
 const ASSETS=[
   './manifest.webmanifest',
   './apple-touch-icon.png',
