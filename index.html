@@ -177,6 +177,28 @@
 .pprog-relay-type-hint{display:flex;flex-direction:column;gap:3px;min-width:0}
 .pprog-relay-type-hint small{font-size:11px;line-height:1.4;font-weight:450;color:#829ab8}
 
+
+/* Read-only composed executive devices (SP4 address layout). */
+.pprog-executors{display:flex;flex-direction:column;gap:12px;min-width:0}
+.pprog-executor-card{border:1px solid #426083;border-radius:15px;background:#112139;overflow:hidden}
+.pprog-executor-card>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 14px;color:#e9f4ff}
+.pprog-executor-card>summary::-webkit-details-marker{display:none}
+.pprog-executor-head{min-width:0;display:flex;flex-direction:column;gap:6px}
+.pprog-executor-head strong{font-size:15px;line-height:1.45;overflow-wrap:anywhere}
+.pprog-executor-head small{color:#96b4d4;font-size:12px}
+.pprog-executor-chevron{color:#a0badd;font-size:22px;flex:none;transition:transform .2s}
+.pprog-executor-card[open] .pprog-executor-chevron{transform:rotate(180deg)}
+.pprog-executor-body{border-top:1px solid #2e4664;padding:13px}
+.pprog-executor-note{font-size:12px;color:#a6bdd9;line-height:1.6;margin-bottom:12px}
+.pprog-executor-parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:9px}
+.pprog-executor-part{border:1px solid #345675;background:#182c45;border-radius:10px;padding:11px 12px;text-align:left;display:flex;flex-direction:column;gap:5px;cursor:pointer;color:#e7f1ff;min-width:0}
+.pprog-executor-part:active{background:#284668}
+.pprog-executor-part-label{font-size:12px;color:#86b9f4;font-weight:700}
+.pprog-executor-part strong{font-size:14px;overflow-wrap:anywhere}
+.pprog-executor-part-detail{font-size:12px;color:#b1c4d9;line-height:1.45}
+.pprog-executor-incomplete{border:1px dashed #5a6580;border-radius:9px;padding:12px;color:#afc1dc;font-size:13px;line-height:1.5}
+@media(max-width:600px){.pprog-executor-card>summary{padding:13px 11px}.pprog-executor-body{padding:11px}.pprog-executor-parts{grid-template-columns:minmax(0,1fr)}}
+
 /* Уведомление появляется только при наличии новой версии. */
 #pprogUpdateNotice{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom));left:14px;right:14px;z-index:200;max-width:520px;margin:auto;background:#1c3553;color:#e9f4ff;border:1px solid #6592c5;border-radius:15px;padding:15px;box-shadow:0 15px 35px #0008;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #pprogUpdateNotice[hidden]{display:none!important}
@@ -268,7 +290,7 @@ function nfmt(s){return Number(s||0).toLocaleString('ru-RU')}
 function empty(message,ico='info'){return `<div class="emptyline">${icon(ico)}<div>${message}</div></div>`}
 function welcome(){return `<div class="empty-app"><div class="welcome"><div class="welcome-icon">${icon('cpu')}</div><div class="eyebrow">PProg Viewer 1.0</div><h2>Конфигурация «Болид»<br><span style="color:#78b0ff">под полным контролем</span></h2><p>Откройте текстовый экспорт PProg и исследуйте приборы, разделы, шлейфы, реле и все сохранённые параметры в одном интерфейсе.</p><button class="install-cta" id="installCta" type="button" onclick="window.pprogShowInstall()" aria-label="Установить PProg Viewer на экран телефона"><span class="install-cta-icon">${icon('download')}</span><span class="install-cta-text"><strong>Установить на телефон</strong><small>Без App Store · отдельное приложение на рабочем столе</small></span><span class="install-cta-chevron">›</span></button><div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Выбрать TXT-файл">${icon('upload')}<strong>Перетащите сюда файл конфигурации</strong><span>или нажмите, чтобы выбрать .TXT · до 25 МБ</span></div><div class="feature-grid"><div class="feature">${icon('layers')}<div><b>Навигация по связям</b><p>Шлейфы, разделы, приборы</p></div></div><div class="feature">${icon('search')}<div><b>Быстрый поиск</b><p>По названию, адресу, номеру</p></div></div><div class="feature">${icon('shield')}<div><b>Приватность</b><p>Без сервера и отправки данных</p></div></div></div></div></div>`}
 function overview(){const linked=model.loops.filter(x=>x.partitions.length).length;const used=model.relays.filter(r=>r.program).length;const stats=[['Приборов',model.devices.length,'Устройства на интерфейсе','cpu'],['Шлейфов / зон',model.loops.length,`${linked} привязано к разделам`,'list'],['Разделов',model.partitions.length,'Логические группы зон','layers'],['Реле',model.relays.length,`${model.outputs.length} выходов — отдельные записи`,'zap']];return head('Обзор системы','Общая информация о загруженной конфигурации',button('Экспорт JSON','json','ghost','download'))+`<div class="config-hero"><div class="config-hero-label">${icon('file-text')} ЗАГРУЖЕННАЯ КОНФИГУРАЦИЯ</div><div class="config-hero-name">${esc(currentFile||'Без названия')}</div><div class="config-hero-version"><span>${icon('cpu')} Пульт С2000</span><strong>Версия ${esc(model.version||'не указана')}</strong></div></div><div class="kpi-grid">${stats.map(([label,v,foot,ico])=>`<div class="panel kpi"><div class="kpi-top">${label}${icon(ico)}</div><div class="kpi-value">${nfmt(v)}</div><div class="kpi-foot">${foot}</div></div>`).join('')}</div>`}
-function devicesPage(){if(!model.devices.length)return head('Приборы','Приборы, зарегистрированные в пульте')+`<div class="panel">${empty('В этом файле нет записей приборов')}</div>`;const d=model.devices[Math.max(0,Math.min(deviceIndex,model.devices.length-1))];const tabs=[['loops',`Шлейфы (${d.loops.length})`],['relays',`Реле (${d.relays.length})`],['outputs',`Выходы (${d.outputs.length})`]];let inner='';if(deviceTab==='loops')inner=loopTable(d.loops.map(l=>({...l,device:d})),true);if(deviceTab==='relays')inner=relayTable(d.relays.map(r=>({...r,device:d})),true);if(deviceTab==='outputs')inner=outputCards(d.outputs);if(false&&deviceTab==='details')inner=`<div class="info-grid">${fieldGrid(d.node.fields)}</div><h4 style="font-size:12px;margin:23px 0 9px">Остальные записи прибора</h4>${d.node.children.map(n=>nodeCard(n,1)).join('')||empty('Нет вложенных записей')}`;if(!deviceOpened)return head('Приборы',`Устройства в конфигурации · ${model.devices.length}`)+`<div class="panel pad device-directory">${model.devices.map((x,i)=>`<button class="list-row device-directory-row" data-device="${i}"><span class="icon-tile">${icon('cpu')}</span><span class="directory-info"><strong>Адрес ${esc(x.address)} · ${esc(x.typeName)}</strong>${x.description?`<span class="device-desc">${esc(x.description)}</span>`:''}<small>${x.loops.length} шлейфов · ${x.relays.length} реле · ${x.outputs.length} выходов</small></span><span class="directory-chevron">›</span></button>`).join('')}</div>`;return head('Прибор №'+esc(d.address),esc(d.typeName),button('← Все приборы','back-devices','ghost'))+`<div class="panel device-detail"><div class="detail-top"><div><div class="eyebrow">Адрес ${esc(d.address)} · Тип ${esc(d.typeId)}</div><h3>${esc(d.typeName)}</h3>${d.description?`<div class="device-desc">${esc(d.description)}</div>`:`<div class="dim" style="margin:5px 0 10px">Описание прибора в TXT не указано</div>`}<div class="taglist">${pill('ШС: '+d.loops.length,'blue')}${pill('Реле: '+d.relays.length)}${pill('Выходы: '+d.outputs.length)}${d.version?pill('Версия: '+d.version,'green'):''}</div></div>${button('Весь TXT','raw-device','sm','code')}</div><div class="tabs">${tabs.map(([id,txt])=>`<button class="tab ${deviceTab===id?'active':''}" data-tab="${id}">${txt}</button>`).join('')}</div>${inner}`}
+function devicesPage(){if(!model.devices.length)return head('Приборы','Приборы, зарегистрированные в пульте')+`<div class="panel">${empty('В этом файле нет записей приборов')}</div>`;const d=model.devices[Math.max(0,Math.min(deviceIndex,model.devices.length-1))];const tabs=[['loops',`Шлейфы (${d.loops.length})`],['relays',`Реле (${d.relays.length})`],['outputs',`Выходы (${d.outputs.length})`],...(d.executors.length?[['executors',`Исп. устройства (${d.executors.length})`]]:[])];let inner='';if(deviceTab==='loops')inner=loopTable(d.loops.map(l=>({...l,device:d})),true);if(deviceTab==='relays')inner=relayTable(d.relays.map(r=>({...r,device:d})),true);if(deviceTab==='outputs')inner=outputCards(d.outputs);if(deviceTab==='executors')inner=executorCards(d.executors,d);if(false&&deviceTab==='details')inner=`<div class="info-grid">${fieldGrid(d.node.fields)}</div><h4 style="font-size:12px;margin:23px 0 9px">Остальные записи прибора</h4>${d.node.children.map(n=>nodeCard(n,1)).join('')||empty('Нет вложенных записей')}`;if(!deviceOpened)return head('Приборы',`Устройства в конфигурации · ${model.devices.length}`)+`<div class="panel pad device-directory">${model.devices.map((x,i)=>`<button class="list-row device-directory-row" data-device="${i}"><span class="icon-tile">${icon('cpu')}</span><span class="directory-info"><strong>Адрес ${esc(x.address)} · ${esc(x.typeName)}</strong>${x.description?`<span class="device-desc">${esc(x.description)}</span>`:''}<small>${x.loops.length} шлейфов · ${x.relays.length} реле · ${x.outputs.length} выходов${x.executors.length?' · '+x.executors.length+' ИУ':''}</small></span><span class="directory-chevron">›</span></button>`).join('')}</div>`;return head('Прибор №'+esc(d.address),esc(d.typeName),button('← Все приборы','back-devices','ghost'))+`<div class="panel device-detail"><div class="detail-top"><div><div class="eyebrow">Адрес ${esc(d.address)} · Тип ${esc(d.typeId)}</div><h3>${esc(d.typeName)}</h3>${d.description?`<div class="device-desc">${esc(d.description)}</div>`:`<div class="dim" style="margin:5px 0 10px">Описание прибора в TXT не указано</div>`}<div class="taglist">${pill('ШС: '+d.loops.length,'blue')}${pill('Реле: '+d.relays.length)}${pill('Выходы: '+d.outputs.length)}${d.executors.length?pill('ИУ: '+d.executors.length,'blue'):''}${d.version?pill('Версия: '+d.version,'green'):''}</div></div>${button('Весь TXT','raw-device','sm','code')}</div><div class="tabs">${tabs.map(([id,txt])=>`<button class="tab ${deviceTab===id?'active':''}" data-tab="${id}">${txt}</button>`).join('')}</div>${inner}`}
 function loopTable(items,compact=false){return items.length?`<div class="table-wrap"><table class="data-table zone-table"><thead><tr>${!compact?'<th>Прибор</th>':''}<th>Шлейф</th><th>Описание</th><th>Раздел</th></tr></thead><tbody>${items.map(l=>`<tr class="${l.type==='0'&&!l.partitions.length?'inactive':''}">${!compact?`<td><button class="td-button" data-device="${model.devices.indexOf(l.device)}">${esc(l.device.typeName)} · ${esc(l.device.address)}</button></td>`:''}<td class="mono">${esc(l.id)}</td><td>${esc(l.name||'—')}</td><td>${l.partitions.length?l.partitions.map(id=>{const p=model.partitions.find(x=>x.id===id);return p?`<button class="td-button" data-partition="${model.partitions.indexOf(p)}">${esc(id)} · ${esc(p.name)}</button>`:pill('Раздел '+id+' не найден','amber')}).join(', '):'<span class="dim">Не указан</span>'}</td></tr>`).join('')}</tbody></table></div>`:empty('Шлейфы отсутствуют','list')}
 // Функциональные типы ниже относятся к записи «Выход». Запись «Реле» независима.
 // Расшифровки кодов проверялись на тестовом экспорте 123333.TXT.
@@ -295,6 +317,37 @@ function outputTypeLabel(output){
   if(!output)return 'Нет данных в TXT';
   return pprogTypeLabel(output.type||lookup(output.node,'Тип_выхода'));
 }
+
+/* Each explicit executive-unit record is displayed even if its internal
+ * address layout is unknown. Complete SP4-style links are derived separately.
+ * Role labels are from the five-address structure, not hardcoded physical IDs.
+ */
+function executorCards(items, device){
+ if(!items.length)return empty('Исполнительные устройства не заданы в TXT','cpu');
+ const deviceIndex=model.devices.indexOf(device);
+ const entry=(label,record,kind,detail)=>{
+   if(!record)return '';
+   return `<button type="button" class="pprog-executor-part" data-device="${deviceIndex}" data-open-tab="${kind}"><span class="pprog-executor-part-label">${esc(label)}</span><strong>${esc(record.id)}${record.name?' · '+esc(record.name):''}</strong>${detail?`<span class="pprog-executor-part-detail">${esc(detail)}</span>`:''}</button>`;
+ };
+ return `<div class="pprog-executors">${items.map(unit=>{
+    const complete=unit.structure==='sp4-five-address'&&!!unit.links;
+    const parts=unit.links;
+    const relay=parts?.relay;
+    const relayType=relay?pprogTypeLabel(lookup(relay.node,'Тип_реле')||lookup(relay.node,'Тип_выхода')):'';
+    const program=relay?.program?`Программа ${relay.program}`:'Программа не указана';
+    const controlled=relay?.partitions?.length||0;
+    const relayDescription=relay?`${program} · Тип: ${relayType} · ${controlled} разд.`:'';
+    const body=complete?`<div class="pprog-executor-parts">
+      ${entry('Управление · запись «Реле»',parts.relay,'relays',relayDescription)}
+      ${entry('Рабочий выход',parts.workingOutput,'outputs','Тип: '+outputTypeLabel(parts.workingOutput))}
+      ${entry('Исходный выход',parts.initialOutput,'outputs','Тип: '+outputTypeLabel(parts.initialOutput))}
+      ${entry('Рабочий концевик',parts.workingLimit,'loops',parts.workingLimit.partitions.length?'Разделы: '+parts.workingLimit.partitions.join(', '):'Раздел не указан')}
+      ${entry('Исходный концевик',parts.initialLimit,'loops',parts.initialLimit.partitions.length?'Разделы: '+parts.initialLimit.partitions.join(', '):'Раздел не указан')}
+     </div>`:`<div class="pprog-executor-incomplete">В TXT есть исполнительное устройство, но полный пятиадресный состав СП4 не подтверждён. Неизвестные связи не достраиваются автоматически.</div>`;
+    return `<details class="pprog-executor-card"><summary><span class="pprog-executor-head"><strong>Исполнительное устройство ${esc(unit.id)}${unit.name?' · '+esc(unit.name):''}</strong><small>${complete?'5 связанных записей · по структуре TXT':'Состав не определён · исходная запись сохранена'}</small></span><span class="pprog-executor-chevron">⌄</span></summary><div class="pprog-executor-body"><div class="pprog-executor-note">${complete?'Полная пятиадресная структура СП4 по данным TXT. Это распознавание схемы, а не подтверждение физической модели.':'Исполнительное устройство показано отдельно от реле и выходов.'}</div>${body}</div></details>`;
+ }).join('')}</div>`;
+}
+
 function outputCards(items){
  return items.length?`<div class="pprog-output-cards">${items.map(o=>`<div class="pprog-output-card"><div class="pprog-output-header"><strong>Выход ${esc(o.id)}</strong><span>Тип: ${esc(outputTypeLabel(o))}</span></div><div class="pprog-output-description">${esc(o.name||'Без описания')}</div>${renderInlineExtras(o.node,['Выход','Описание','Тип_выхода'])}</div>`).join('')}</div>`:empty('В TXT нет записей «Выход»','zap')
 }
