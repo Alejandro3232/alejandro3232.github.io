@@ -126,6 +126,21 @@
   :root { --pprog-toolbar-height:62px; }
 }
 
+
+/* iPhone/iPad: crisp, opaque navigation layers (disable frosted-glass blur).
+   backdrop-filter on fixed/sticky elements also causes extra Safari compositing. */
+@media (max-width:850px) {
+  .topbar, .mobile-bottom-nav, .mobile-backdrop.open,
+  .install-modal, .hover-drop {
+    -webkit-backdrop-filter:none !important;
+    backdrop-filter:none !important;
+  }
+  .topbar { background:#0c1421 !important; }
+  .mobile-bottom-nav { background:#0e1928 !important; }
+  .sidebar { background:#0c1421 !important; }
+  .mobile-backdrop.open { background:rgba(3,8,19,.75) !important; }
+}
+
 /* Уведомление появляется только при наличии новой версии. */
 #pprogUpdateNotice{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom));left:14px;right:14px;z-index:200;max-width:520px;margin:auto;background:#1c3553;color:#e9f4ff;border:1px solid #6592c5;border-radius:15px;padding:15px;box-shadow:0 15px 35px #0008;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 #pprogUpdateNotice[hidden]{display:none!important}
@@ -290,7 +305,7 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
 /* Клиентский механизм обновления. Проверка через version.json минует кеш SW. */
 (function(){
   'use strict';
-  const LOCAL_BUILD='2026.11.10.3';
+  const LOCAL_BUILD='2026.11.10.4';
   let checking=false;
   const banner=document.createElement('div');
   banner.id='pprogUpdateNotice';
