@@ -42,7 +42,7 @@
  .data-table{font-size:12px}
  .panel,.kpi,.section-card,.device-detail{max-width:100%}
  .page-head{gap:12px}
- .mobile-bottom-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;align-items:stretch;justify-content:space-around;padding:7px max(8px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));background:#0e1928f5;border-top:1px solid #34435a;backdrop-filter:blur(22px);box-shadow:0 -10px 32px #0005}
+ .mobile-bottom-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;align-items:stretch;justify-content:space-around;padding:7px max(8px,env(safe-area-inset-right)) max(5px,env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));background:#0e1928f5;border-top:1px solid #34435a;backdrop-filter:blur(22px);box-shadow:0 -10px 32px #0005}
  .mobile-bottom-nav button{flex:1;min-width:0;max-width:100px;min-height:49px;border:0;border-radius:11px;background:transparent;color:#9db1cb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:650}
  .mobile-bottom-nav button .ico{width:20px;height:20px}
  .mobile-bottom-nav button.active{color:#bcd6ff;background:#223957}
@@ -135,40 +135,12 @@
     -webkit-backdrop-filter:none !important;
     backdrop-filter:none !important;
   }
-  .topbar { background:#0c1421 !important; }
+  .topbar { background:#090e18 !important; }
   .mobile-bottom-nav { background:#0e1928 !important; }
-  .sidebar { background:#0c1421 !important; }
+  .sidebar { background:#090e18 !important; }
   .mobile-backdrop.open { background:rgba(3,8,19,.75) !important; }
 }
 
-
-/* iOS 27 Web App scroll-edge: real fixed opaque element at the viewport top.
-   A CSS pseudo-element does not trigger iOS's solid edge rendering. */
-#pprogTopEdgeAnchor { display:none; }
-@media (max-width:850px) and (display-mode:standalone) {
-  #pprogTopEdgeAnchor {
-    display:block;
-    position:fixed;
-    inset:0 0 auto 0;
-    width:100%;
-    height:9px;
-    background-color:#090e18;
-    z-index:120;
-    pointer-events:none;
-    -webkit-backdrop-filter:none;
-    backdrop-filter:none;
-  }
-}
-@media (max-width:850px) {
-  body.pprog-ios-standalone #pprogTopEdgeAnchor {
-    display:block;
-    position:fixed;
-    top:0; left:0; width:100%; height:9px;
-    background-color:#090e18;
-    z-index:120;
-    pointer-events:none;
-  }
-}
 
 /* Уведомление появляется только при наличии новой версии. */
 #pprogUpdateNotice{position:fixed;bottom:calc(86px + env(safe-area-inset-bottom));left:14px;right:14px;z-index:200;max-width:520px;margin:auto;background:#1c3553;color:#e9f4ff;border:1px solid #6592c5;border-radius:15px;padding:15px;box-shadow:0 15px 35px #0008;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
@@ -180,7 +152,6 @@
 </style>
 </head>
 <body>
-<div id="pprogTopEdgeAnchor" aria-hidden="true"></div>
 <div class="mobile-backdrop" id="mobileBackdrop" aria-hidden="true"></div><div class="app"><aside class="sidebar" id="sidebar"><div class="brand"><div class="brandmark" id="brandIcon"></div><div><h1>PProg <span style="color:#79acff">Viewer</span></h1><p>BOLID / CONFIG STUDIO</p></div></div><div class="nav-caption">Рабочая область</div><nav class="nav" id="navMain"></nav><div class="nav-caption">Настройки и данные</div><nav class="nav" id="navExtra"></nav><div class="sidebar-bottom"><div class="priv" id="offlineText"></div><div style="margin-top:10px">Локальный просмотр TXT · Windows-1251 / UTF-8</div><div style="margin-top:10px;opacity:.6">Неофициальный инструмент · Только чтение</div></div></aside><main class="main"><header class="topbar"><div style="display:flex;align-items:center;gap:14px"><button class="btn ghost mobile-menu" id="menuBtn" aria-label="Меню"></button><div class="crumb" id="crumb"></div></div><div class="tools"><label class="searchbox" id="searchWrap"><span id="searchIcon"></span><input id="globalSearch" placeholder="Поиск по конфигурации..." autocomplete="off" aria-label="Поиск по конфигурации"></label><span class="file-pill hide" id="fileNamePill" title="Имя открытого файла"></span><button class="btn primary" id="openBtn" aria-label="Открыть TXT-конфигурацию"><span id="openIcon"></span><span>Открыть TXT</span></button><input id="fileInput" type="file" accept=".txt,.TXT,text/plain" hidden></div></header><div class="content" id="content"></div></main></div><nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Быстрая навигация"></nav><div class="hover-drop" id="hoverDrop"><div><span id="dropIcon"></span>Отпустите файл PProg<br><span style="font-size:13px;font-weight:400;color:#aac3e5">Загрузка только в память браузера</span></div></div><div id="toastHost" aria-live="polite"></div><div class="install-modal" id="installHelp" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle" hidden>
  <div class="install-modal-card"><div class="install-modal-top"><img src="./apple-touch-icon.png" alt="Иконка PProg Viewer"><div><div class="install-modal-title" id="installHelpTitle">Установка PProg Viewer</div><div class="install-modal-sub">На iPhone · без App Store</div></div></div>
   <div class="install-steps">
@@ -332,16 +303,10 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
 </script>
 
 <script>
-/* Older iOS standalone detection when display-mode is not exposed. */
-if(window.navigator.standalone===true){
-  document.body.classList.add('pprog-ios-standalone');
-}
-</script>
-<script>
 /* Клиентский механизм обновления. Проверка через version.json минует кеш SW. */
 (function(){
   'use strict';
-  const LOCAL_BUILD='2026.11.10.5';
+  const LOCAL_BUILD='2026.11.10.6';
   let checking=false;
   const banner=document.createElement('div');
   banner.id='pprogUpdateNotice';
