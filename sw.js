@@ -1,4 +1,4 @@
-const CACHE = 'pprog-viewer-v14-share-v4-20261109';
+const CACHE = 'pprog-viewer-v14-share-v5-20261110-zoom';
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./apple-touch-icon.png", "./apple-touch-icon-precomposed.png", "./apple-touch-icon-180x180.png", "./icon-152.png", "./icon-167.png", "./icon-180.png", "./icon-192.png", "./icon-512.png", "./favicon-32.png", "./favicon.ico"];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
