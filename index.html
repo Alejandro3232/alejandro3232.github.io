@@ -286,12 +286,12 @@ function relayTable(items,compact=false){
    const directType=rawRelayType||rawOutputTypeOnRelay;
    // Relay's own fields take priority; a same-number output is only a clue.
    const sameNumberOutput=r.device?.outputs?.find(o=>String(o.id)===String(r.id));
-   const typeLabel=directType?pprogTypeLabel(directType):sameNumberOutput?outputTypeLabel(sameNumberOutput):'Не указан в TXT';
+   const typeLabel=directType?pprogTypeLabel(directType):sameNumberOutput?outputTypeLabel(sameNumberOutput):pprogTypeLabel('');
    const typeSource=directType
      ?'<small>Из записи «Реле» в TXT</small>'
      :sameNumberOutput
        ?`<small>Из записи «Выход ${esc(sameNumberOutput.id)}» · совпадение номера, связь не подтверждена</small>`
-       :'';
+       :'<small>Тип не задан в TXT · используется значение PProg по умолчанию</small>';
    const typeRows=`<span class="pprog-relay-type-hint"><b>Тип:</b> ${esc(typeLabel)}${typeSource}</span>`;
    return `<details class="relay-card"><summary><span class="relay-summary"><strong class="relay-title">Реле ${esc(r.id)}${r.name?` · ${esc(r.name)}`:''}</strong><span class="relay-params">${typeRows}<span><b>Программа:</b> ${esc(r.program||'—')}${programLabel?' ('+esc(programLabel)+')':''}</span><span><b>Задержка:</b> ${esc(r.delay||'—')} с</span><span><b>Время упр.:</b> ${esc(r.duration||'—')} с</span></span></span><span class="relay-count">${r.partitions.length} разд.</span><span class="relay-chevron">⌄</span></summary><div class="relay-body"><div class="relay-body-heading">Привязанные разделы (${r.partitions.length})</div>${r.partitions.length?`<div class="relay-partitions">${([...r.partitions].sort((a,b)=>Number(a)-Number(b))).map(id=>{const p=model.partitions.find(x=>x.id===id);return `<button class="relay-partition" data-partition="${p?model.partitions.indexOf(p):''}" ${p?'':'disabled'}><span class="relay-partition-name"><strong>Раздел ${esc(id)}</strong><span>${esc(p?.name||'Название не найдено в TXT')}</span></span><span class="relay-partition-arrow">›</span></button>`}).join('')}</div>`:'<div class="dim" style="padding:12px 0">Привязанные разделы в TXT не указаны</div>'}</div></details>`}).join('')}</div>`:empty('В TXT нет записей «Реле»','zap')
 }
@@ -432,7 +432,7 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
 /* Клиентский механизм обновления. Проверка через version.json минует кеш SW. */
 (function(){
   'use strict';
-  const LOCAL_BUILD='2026.11.10.11';
+  const LOCAL_BUILD='2026.11.10.12';
   let checking=false;
   const banner=document.createElement('div');
   banner.id='pprogUpdateNotice';
