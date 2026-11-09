@@ -261,13 +261,19 @@ const PPROG_OUTPUT_TYPES=Object.freeze({
   '11':'Противопожарное оборудование',
   '12':'Пожаротушение'
 });
+// The PProg inspector shows user-friendly names, while TXT stores numeric codes.
+// Confirmed on the supplied 123333.TXT export and the PProg relay inspector screenshot.
+// Unknown codes must stay explicitly unverified, rather than being guessed.
+function pprogTypeLabel(value){
+  const code=String(value??'').trim();
+  if(!code||code==='0')return 'Реле (по умолчанию)';
+  if(Object.prototype.hasOwnProperty.call(PPROG_OUTPUT_TYPES,code))return PPROG_OUTPUT_TYPES[code];
+  if(/^\d+$/.test(code))return 'Неизвестный тип (код '+code+')';
+  return code; // Human-readable names already exported as text are preserved.
+}
 function outputTypeLabel(output){
   if(!output)return 'Нет данных в TXT';
-  const code=String(output.type||lookup(output.node,'Тип_выхода')||'').trim();
-  if(!code)return 'Тип не указан в TXT';
-  return Object.prototype.hasOwnProperty.call(PPROG_OUTPUT_TYPES,code)
-    ? PPROG_OUTPUT_TYPES[code]
-    : 'Тип '+code+' (расшифровка не подтверждена)';
+  return pprogTypeLabel(output.type||lookup(output.node,'Тип_выхода'));
 }
 function outputCards(items){
  return items.length?`<div class="pprog-output-cards">${items.map(o=>`<div class="pprog-output-card"><div class="pprog-output-header"><strong>Выход ${esc(o.id)}</strong><span>Тип: ${esc(outputTypeLabel(o))}</span></div><div class="pprog-output-description">${esc(o.name||'Без описания')}</div>${renderInlineExtras(o.node,['Выход','Описание','Тип_выхода'])}</div>`).join('')}</div>`:empty('В TXT нет записей «Выход»','zap')
@@ -277,13 +283,16 @@ function relayTable(items,compact=false){
    const programLabel=lookup(r.node,'Название программы')||lookup(r.node,'Описание программы')||'';
    const rawRelayType=lookup(r.node,'Тип_реле');
    const rawOutputTypeOnRelay=lookup(r.node,'Тип_выхода');
-   // An explicitly stored field belongs to the relay record itself.
-   // An output with the same device address and number is shown for reference only.
-   const directRelayType=rawRelayType||rawOutputTypeOnRelay;
-   const directTypeLabel=rawRelayType?rawRelayType:(PPROG_OUTPUT_TYPES[String(rawOutputTypeOnRelay).trim()]||('Тип '+rawOutputTypeOnRelay+' (расшифровка не подтверждена)'));
+   const directType=rawRelayType||rawOutputTypeOnRelay;
+   // Relay's own fields take priority; a same-number output is only a clue.
    const sameNumberOutput=r.device?.outputs?.find(o=>String(o.id)===String(r.id));
-   const outputTypeHint=sameNumberOutput?`<span class="pprog-relay-type-hint"><b>Тип выхода ${esc(sameNumberOutput.id)}:</b> ${esc(outputTypeLabel(sameNumberOutput))}<small>Совпадение номера · связь с реле не подтверждена</small></span>`:'';
-   const typeRows=`${directRelayType?`<span><b>Тип в записи «Реле»:</b> ${esc(directTypeLabel)}</span>`:''}${outputTypeHint}${!directRelayType&&!sameNumberOutput?'<span><b>Тип:</b> Не указан в TXT</span>':''}`;
+   const typeLabel=directType?pprogTypeLabel(directType):sameNumberOutput?outputTypeLabel(sameNumberOutput):'Не указан в TXT';
+   const typeSource=directType
+     ?'<small>Из записи «Реле» в TXT</small>'
+     :sameNumberOutput
+       ?`<small>Из записи «Выход ${esc(sameNumberOutput.id)}» · совпадение номера, связь не подтверждена</small>`
+       :'';
+   const typeRows=`<span class="pprog-relay-type-hint"><b>Тип:</b> ${esc(typeLabel)}${typeSource}</span>`;
    return `<details class="relay-card"><summary><span class="relay-summary"><strong class="relay-title">Реле ${esc(r.id)}${r.name?` · ${esc(r.name)}`:''}</strong><span class="relay-params">${typeRows}<span><b>Программа:</b> ${esc(r.program||'—')}${programLabel?' ('+esc(programLabel)+')':''}</span><span><b>Задержка:</b> ${esc(r.delay||'—')} с</span><span><b>Время упр.:</b> ${esc(r.duration||'—')} с</span></span></span><span class="relay-count">${r.partitions.length} разд.</span><span class="relay-chevron">⌄</span></summary><div class="relay-body"><div class="relay-body-heading">Привязанные разделы (${r.partitions.length})</div>${r.partitions.length?`<div class="relay-partitions">${([...r.partitions].sort((a,b)=>Number(a)-Number(b))).map(id=>{const p=model.partitions.find(x=>x.id===id);return `<button class="relay-partition" data-partition="${p?model.partitions.indexOf(p):''}" ${p?'':'disabled'}><span class="relay-partition-name"><strong>Раздел ${esc(id)}</strong><span>${esc(p?.name||'Название не найдено в TXT')}</span></span><span class="relay-partition-arrow">›</span></button>`}).join('')}</div>`:'<div class="dim" style="padding:12px 0">Привязанные разделы в TXT не указаны</div>'}</div></details>`}).join('')}</div>`:empty('В TXT нет записей «Реле»','zap')
 }
 function loopsPage(){let arr=model.loops;if(viewFilter==='linked')arr=arr.filter(l=>l.partitions.length);if(viewFilter==='unlinked')arr=arr.filter(l=>!l.partitions.length);if(viewFilter==='nonzero')arr=arr.filter(l=>l.type!==''&&l.type!=='0');if(listSearch)arr=arr.filter(l=>norm([l.id,l.name,l.type,l.device.address,l.device.typeName,...l.partitions].join(' ')).includes(norm(listSearch)));return head('Шлейфы и зоны',`Всего ${model.loops.length} записей, из них ${model.loops.filter(l=>l.partitions.length).length} с привязкой к разделам`,button('Экспорт CSV','csv-loops','ghost','download'))+`<div class="panel pad"><div class="bar"><div style="display:flex;gap:8px;flex-wrap:wrap"><select class="filter" id="viewFilter" aria-label="Фильтр шлейфов"><option value="all" ${viewFilter==='all'?'selected':''}>Все шлейфы</option><option value="linked" ${viewFilter==='linked'?'selected':''}>В разделах</option><option value="unlinked" ${viewFilter==='unlinked'?'selected':''}>Без раздела</option><option value="nonzero" ${viewFilter==='nonzero'?'selected':''}>Тип ШС ≠ 0</option></select></div><input class="filter mini-search" id="listSearch" value="${esc(listSearch)}" placeholder="Поиск по шлейфам, адресу или описанию..."></div><div class="small muted" style="margin-bottom:8px">Найдено: ${arr.length}. Числовые типы ШС показаны без интерпретации; описания взяты из файла.</div>${loopTable(arr)}</div>`}
@@ -423,7 +432,7 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
 /* Клиентский механизм обновления. Проверка через version.json минует кеш SW. */
 (function(){
   'use strict';
-  const LOCAL_BUILD='2026.11.10.10';
+  const LOCAL_BUILD='2026.11.10.11';
   let checking=false;
   const banner=document.createElement('div');
   banner.id='pprogUpdateNotice';
